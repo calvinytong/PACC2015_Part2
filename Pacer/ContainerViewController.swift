@@ -13,11 +13,12 @@ class ContainerViewController: UIViewController {
     
     // Outlet used in storyboard
     @IBOutlet var scrollView: UIScrollView?;
+    var pages: CGFloat = 3;
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
         if (NSUserDefaults.standardUserDefaults().integerForKey("loginstatus") as Int != 1){
-            self.performSegueWithIdentifier("goToLogin", sender: self)
+            //self.performSegueWithIdentifier("goToLogin", sender: self)
         }
     }
     
@@ -27,6 +28,7 @@ class ContainerViewController: UIViewController {
         
         // 1) Create the three views used in the swipe container view
         var AVc :AViewController =  AViewController(nibName: "AViewController", bundle: nil);
+        var ProfileVc :ProfileViewController =  ProfileViewController(nibName: "ProfileViewController", bundle: nil);
         var CVc :CViewController =  CViewController(nibName: "CViewController", bundle: nil);
         
         
@@ -37,24 +39,28 @@ class ContainerViewController: UIViewController {
         CVc.didMoveToParentViewController(self);
         
         
+        self.addChildViewController(ProfileVc);
+        self.scrollView!.addSubview(ProfileVc.view);
+        ProfileVc.didMoveToParentViewController(self);
+        
         
         self.addChildViewController(AVc);
         self.scrollView!.addSubview(AVc.view);
         AVc.didMoveToParentViewController(self);
-        
+
         
         // 3) Set up the frames of the view controllers to align
         //    with eachother inside the container view
         var adminFrame :CGRect = AVc.view.frame;
         adminFrame.origin.x = adminFrame.width;
         CVc.view.frame = adminFrame;
-        
+        ProfileVc.view.frame = adminFrame;
         
         
         
         // 4) Finally set the size of the scroll view that contains the frames
-        var scrollWidth: CGFloat  = 2 * self.view.frame.width
-        var scrollHeight: CGFloat  = self.view.frame.size.height
+        var scrollWidth: CGFloat  = pages * self.view.frame.width
+        var scrollHeight: CGFloat  = self.view.frame.size.height;
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight);
     }
     
