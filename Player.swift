@@ -14,20 +14,21 @@ class Player
     var score : NSInteger
     var ObjectID : String
     var query = PFQuery(className:"Player")
+    var Object : PFObject
     
     init(name : String)
     {
         self.score = 0
         self.ObjectID = ""
-        let playerObject = PFObject(className: "Player")
-        playerObject["name"] = name
-        playerObject["team"] = ""
-        playerObject["score"] = self.score
+        self.Object = PFObject(className: "Player")
+        Object["name"] = name
+        Object["team"] = ""
+        Object["score"] = self.score
         
-        playerObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success)
             {
-                playerObject.objectId! = self.ObjectID
+                self.Object.objectId! = self.ObjectID
                 println("Object has been saved.")
             }
             else
@@ -46,7 +47,9 @@ class Player
             } else if let playerObject = playerObject {
                 playerObject["score"] = self.score
                 playerObject.saveInBackground()
+                self.Object = playerObject
             }
+            
         }
         
     }
@@ -66,7 +69,9 @@ class Player
             } else if let playerObject = playerObject {
                 playerObject["team"] = teamName
                 playerObject.saveInBackground()
+                self.Object = playerObject
             }
+            
         }
     }
     
