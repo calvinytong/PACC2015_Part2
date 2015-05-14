@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E19C28D1B011A4500B25E84 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19C28C1B011A4500B25E84 /* loginViewController.swift */; };
+		3E3F155C1B04453300FF09DB /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F155B1B04453300FF09DB /* signUpViewController.swift */; };
 		3E4302981B01AD48003E4727 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4302961B01AD48003E4727 /* Bolts.framework */; };
 		3E4302991B01AD48003E4727 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4302971B01AD48003E4727 /* Parse.framework */; };
 		3E43029B1B01AD60003E4727 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E43029A1B01AD60003E4727 /* Social.framework */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		3E19C28C1B011A4500B25E84 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		3E3F155B1B04453300FF09DB /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		3E4302961B01AD48003E4727 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		3E4302971B01AD48003E4727 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		3E43029A1B01AD60003E4727 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -169,6 +171,7 @@
 				3E4302BA1B01B01C003E4727 /* Competition.swift */,
 				7C5EFF261AF9D8A800A8E425 /* AppDelegate.swift */,
 				7C5EFF281AF9D8A800A8E425 /* ContainerViewController.swift */,
+				3E3F155B1B04453300FF09DB /* signUpViewController.swift */,
 				3E19C28C1B011A4500B25E84 /* loginViewController.swift */,
 				7C5EFF2A1AF9D8A800A8E425 /* Main.storyboard */,
 				7C5EFF2D1AF9D8A800A8E425 /* Images.xcassets */,
@@ -309,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3F155C1B04453300FF09DB /* signUpViewController.swift in Sources */,
 				3E4302B91B01AF87003E4727 /* Team.swift in Sources */,
 				3E4302BB1B01B01C003E4727 /* Competition.swift in Sources */,
 				3E4302B51B01ADFF003E4727 /* ParseManager.swift in Sources */,
