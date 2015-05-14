@@ -14,7 +14,10 @@ class loginViewController : UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passworldField: UITextField!
     @IBAction func pressLogin(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if (usernameField.text == "username" && passworldField.text == "password"){
+            NSUserDefaults().setInteger(1, forKey: "loginstatus")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {

@@ -16,9 +16,9 @@ class ContainerViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
-        //let pres: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        
-        self.performSegueWithIdentifier("goToLogin", sender: self)
+        if (NSUserDefaults.standardUserDefaults().integerForKey("loginstatus") as Int != 1){
+            self.performSegueWithIdentifier("goToLogin", sender: self)
+        }
     }
     
     
