@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>52B61D0D7E3F747D77FA04FF31F4004FAFFF5369</key>
-		<string>https://github.com/ctong1234/PACC2015.git</string>
+		<string>https://github.com/ctong1234/PACC2015_Part2.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Pacer.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/ctong1234/PACC2015.git</string>
+	<string>https://github.com/ctong1234/PACC2015_Part2.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
