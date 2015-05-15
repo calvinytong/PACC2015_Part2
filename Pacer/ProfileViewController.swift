@@ -49,12 +49,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        filtered = data.filter({(text) -&gt: Bool in
+        filtered = data.filter({(text) -> Bool in
             let tmp: NSString = text;
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch);
             return range.location != NSNotFound})
         /*
-        filtered = data.filter({ (text) -&gt; Bool in
+        filtered = data.filter({ (text) -> Bool in
             let tmp: NSString = text
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
@@ -75,12 +75,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -&gt; Int
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1;
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if(searchActive)
         {
@@ -89,9 +89,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         return data.count;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell;
+//        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell;
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         if(searchActive)
         {
             cell.textLabel?.text = filtered[indexPath.row]
