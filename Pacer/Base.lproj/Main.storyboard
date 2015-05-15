@@ -195,7 +195,6 @@
         <!--Container View Controller-->
         <scene sceneID="qXF-hP-pc1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NWo-L0-ff3" sceneMemberID="firstResponder"/>
                 <viewController id="x3M-8i-5tE" customClass="ContainerViewController" customModule="Pacer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lfg-w4-gj2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -215,13 +214,13 @@
                         <segue destination="emb-lH-EYp" kind="modal" identifier="goToLogin" id="uQW-gx-Yju"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NWo-L0-ff3" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="945" y="-285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YFP-y8-jUE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dKo-Wm-kt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6ux-0B-UAt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U07-rc-Y0l">
@@ -233,6 +232,7 @@
                         <segue destination="x3M-8i-5tE" kind="relationship" relationship="rootViewController" id="f4D-6s-Twr"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dKo-Wm-kt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="357" y="-257"/>
         </scene>
