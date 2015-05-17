@@ -15,9 +15,11 @@ class Player
     var ObjectID : String
     var query = PFQuery(className:"Player")
     var Object : PFObject
+    var pedometerHelper : PedometerHelper
     
     init(name : String)
     {
+        self.pedometerHelper = PedometerHelper()
         self.score = 0
         self.ObjectID = ""
         self.Object = PFObject(className: "Player")
@@ -56,7 +58,7 @@ class Player
     
     func updateScore()
     {
-        //to implement get pedometer to push score to student object
+        self.score = self.pedometerHelper.steps
         pushScore()
     }
     
@@ -73,6 +75,7 @@ class Player
             }
             
         }
+        pedometerHelper.startCollection()
     }
     
 }
