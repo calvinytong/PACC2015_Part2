@@ -28,7 +28,7 @@ class ContainerViewController: UIViewController {
         
         // 1) Create the three views used in the swipe container view
         var AVc :AViewController =  AViewController(nibName: "AViewController", bundle: nil);
-//        var ProfileVc :ViewController =  ViewController(nibName: "ViewController", bundle: nil);
+        var ProfileVc :ViewController2 =  ViewController2(nibName: "ViewController2", bundle: nil);
         var CVc :CViewController =  CViewController(nibName: "CViewController", bundle: nil);
         
         
@@ -38,11 +38,11 @@ class ContainerViewController: UIViewController {
         self.scrollView!.addSubview(CVc.view);
         CVc.didMoveToParentViewController(self);
         
-  /*
+  
         self.addChildViewController(ProfileVc);
         self.scrollView!.addSubview(ProfileVc.view);
         ProfileVc.didMoveToParentViewController(self);
-    */
+    
         
         self.addChildViewController(AVc);
         self.scrollView!.addSubview(AVc.view);
@@ -54,7 +54,7 @@ class ContainerViewController: UIViewController {
         var adminFrame :CGRect = AVc.view.frame;
         adminFrame.origin.x = adminFrame.width;
         CVc.view.frame = adminFrame;
-//        ProfileVc.view.frame = adminFrame;
+        ProfileVc.view.frame = adminFrame;
         
         
         
