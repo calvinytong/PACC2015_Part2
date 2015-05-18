@@ -23,7 +23,7 @@ class loginViewController : UIViewController {
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
-        if (NSUserDefaults.standardUserDefaults().integerForKey("loginstatus") as Int == 1){
+        if (PFUser.currentUser() != nil){
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         

@@ -8,6 +8,7 @@
 
 
 import UIKit
+import Parse
 
 class ContainerViewController: UIViewController {
     
@@ -17,8 +18,8 @@ class ContainerViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
-        if (NSUserDefaults.standardUserDefaults().integerForKey("loginstatus") as Int != 1){
-            //self.performSegueWithIdentifier("goToLogin", sender: self)
+        if (PFUser.currentUser() == nil){ 
+            self.performSegueWithIdentifier("goToLogin", sender: self)
         }
     }
     

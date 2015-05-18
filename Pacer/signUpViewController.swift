@@ -19,6 +19,7 @@ class signUpViewController : UIViewController {
     @IBOutlet weak var createEmail: UITextField!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
     }
     
@@ -56,6 +57,7 @@ class signUpViewController : UIViewController {
                 failAlert.addButtonWithTitle("Try Again")
                 failAlert.show()
             } else {
+                
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
