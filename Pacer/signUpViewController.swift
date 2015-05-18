@@ -43,7 +43,7 @@ class signUpViewController : UIViewController {
         user.password = createPassword.text
         user.email = createEmail.text
         let userplayer = Player(name : createUsername.text)
-        user["objectid"] = userplayer.ObjectID
+        user["profile"] = userplayer.Object
         
         
         user.signUpInBackgroundWithBlock {
