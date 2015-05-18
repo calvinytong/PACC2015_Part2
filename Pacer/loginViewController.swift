@@ -8,6 +8,8 @@
 
 import UIKit
 import Foundation
+import Parse
+import Bolts
 
 
 let errorTitle = "Error"
@@ -18,33 +20,6 @@ class loginViewController : UIViewController {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passworldField: UITextField!
-    @IBAction func pressLogin(sender: UIButton) {
-        if (usernameField.text == "" || passworldField.text == ""){
-            var failAlert: UIAlertView = UIAlertView()
-            failAlert.title = errorTitle
-            failAlert.message = "Please enter in your username and password."
-            failAlert.addButtonWithTitle(errorButtonString)
-            failAlert.show()
-        } else if (isUsernamePasswordCombo()){
-            loginWithUsername(usernameField.text)
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            var failAlert: UIAlertView = UIAlertView()
-            failAlert.title = errorTitle
-            failAlert.addButtonWithTitle(errorButtonString)
-            failAlert.message = "Invalid username/password combination."
-            failAlert.show()
-        }
-    }
-    
-    func isUsernamePasswordCombo() -> Bool{
-        //Add actual Parse function here.
-        return usernameField.text == "username" && passworldField.text == "password"
-    }
-    
-    @IBAction func pressSignUp(sender: UIButton) {
-        self.performSegueWithIdentifier("toSignUp", sender: self)
-    }
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
@@ -62,9 +37,47 @@ class loginViewController : UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    @IBAction func pressLogin(sender: UIButton) {
+        if (usernameField.text.isEmpty || passworldField.text.isEmpty)
+        {
+            var failAlert: UIAlertView = UIAlertView()
+            failAlert.title = errorTitle
+            failAlert.message = "Please enter in your username and password."
+            failAlert.addButtonWithTitle(errorButtonString)
+            failAlert.show()
+        }
+        else
+        {
+            login()
+        }
+    }
+    
+    @IBAction func pressSignUp(sender: UIButton) {
+        self.performSegueWithIdentifier("toSignUp", sender: self)
+    }
+    
+    func login() -> Bool{
+        var loggedIn : Bool = true
+        PFUser.logInWithUsernameInBackground(usernameField.text, password: passworldField.text) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                //use PFUser.CurrentUser to Access the current user
+                loggedIn = true
+                self.dismissViewControllerAnimated(true, completion: nil)
+                println(PFUser.currentUser())
+            } else {
+                var failAlert: UIAlertView = UIAlertView()
+                failAlert.title = errorTitle
+                failAlert.addButtonWithTitle(errorButtonString)
+                failAlert.message = "Invalid username/password combination."
+                failAlert.show()
+            }
+        }
+        return loggedIn
+    }
+    
+    
+
+    
 }
 
-func loginWithUsername(username: String){
-    NSUserDefaults().setInteger(1, forKey: "loginstatus")
-    NSUserDefaults().setObject(username as String, forKey: "username")
-}
