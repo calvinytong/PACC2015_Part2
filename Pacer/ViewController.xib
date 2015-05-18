@@ -6,8 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Pacer" customModuleProvider="target">
             <connections>
+                <outlet property="Cell" destination="Z0l-fV-CJ6" id="Bz6-R9-G7z"/>
                 <outlet property="searchBar" destination="sB7-PN-mkJ" id="7ak-K6-uj4"/>
                 <outlet property="tableView" destination="CEZ-CT-0Pb" id="0CB-Bb-VI0"/>
+                <outlet property="totalView" destination="i5M-Pr-FkT" id="dgY-8O-jDi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
