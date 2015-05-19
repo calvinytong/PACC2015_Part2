@@ -62,24 +62,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 1
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if(searchActive) {
-    return filtered.count
-    }
-    return data.count;
+        if(searchActive) {
+            return filtered.count
+        }
+        return data.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = Cell;
-    if(searchActive){
-    cell.textLabel?.text = filtered[indexPath.row]
-    } else {
-    cell.textLabel?.text = data[indexPath.row];
-    }
+        if(searchActive){
+            cell.textLabel?.text = filtered[indexPath.row]
+        } else {
+            cell.textLabel?.text = data[indexPath.row];
+        }
     
-    return cell;
+        return cell;
     }
 }

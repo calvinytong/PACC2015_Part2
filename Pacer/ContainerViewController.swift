@@ -21,6 +21,7 @@ class ContainerViewController: UIViewController {
         if (PFUser.currentUser() == nil){ 
             self.performSegueWithIdentifier("goToLogin", sender: self)
         }
+        
     }
     
     
@@ -55,13 +56,14 @@ class ContainerViewController: UIViewController {
         var adminFrame :CGRect = AVc.view.frame;
         adminFrame.origin.x = adminFrame.width;
         CVc.view.frame = adminFrame;
+        adminFrame.origin.x = adminFrame.width;
         ProfileVc.view.frame = adminFrame;
         
         
         
         // 4) Finally set the size of the scroll view that contains the frames
-        var scrollWidth: CGFloat  = pages * self.view.frame.width
-        var scrollHeight: CGFloat  = self.view.frame.size.height;
+        var scrollWidth: CGFloat  = pages * adminFrame.width
+        var scrollHeight: CGFloat  = adminFrame.width
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight);
     }
     

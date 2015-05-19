@@ -21,7 +21,11 @@ class loginViewController : UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passworldField: UITextField!
     
-    override func viewDidAppear(animated: Bool){
+    @IBAction func backgroundTap(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+        override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
         if (PFUser.currentUser() != nil){
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -31,6 +35,8 @@ class loginViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

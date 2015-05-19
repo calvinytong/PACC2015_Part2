@@ -46,11 +46,13 @@
                                 <rect key="frame" x="74" y="412" width="172" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
+                                <gestureRecognizers/>
                                 <state key="normal" title="No account? Sign up.">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="pressSignUp:" destination="emb-lH-EYp" eventType="touchUpInside" id="MKN-YR-DUW"/>
+                                    <outletCollection property="gestureRecognizers" destination="ZXS-u0-7Tt" appends="YES" id="mCt-za-no4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fBk-JO-Eav">
@@ -63,6 +65,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D1h-Fr-rQx">
                                 <rect key="frame" x="51" y="207" width="82" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -77,6 +80,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ZXS-u0-7Tt" appends="YES" id="e0V-vE-eAF"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="BHX-Bd-9Fs"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -87,6 +93,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fa-e2-7MY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ZXS-u0-7Tt">
+                    <connections>
+                        <action selector="backgroundTap:" destination="emb-lH-EYp" id="8tw-hb-h0Z"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="945" y="484"/>
         </scene>
@@ -179,6 +190,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="JI3-fU-Hfv" appends="YES" id="he6-gn-6Ey"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="bxB-1M-6hM"/>
                     <connections>
@@ -189,6 +204,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hxE-TO-20V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="JI3-fU-Hfv">
+                    <connections>
+                        <action selector="backTapped:" destination="8V0-WU-LIe" id="nfr-pe-kM4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="945" y="1177"/>
         </scene>

@@ -18,6 +18,9 @@ class signUpViewController : UIViewController {
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var createEmail: UITextField!
     
+    @IBAction func backTapped(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
