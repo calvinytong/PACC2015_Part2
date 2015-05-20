@@ -14,7 +14,7 @@ class ContainerViewController: UIViewController {
     
     // Outlet used in storyboard
     @IBOutlet var scrollView: UIScrollView?;
-    var pages: CGFloat = 3;
+    var pages: CGFloat = 4;
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
@@ -53,18 +53,18 @@ class ContainerViewController: UIViewController {
         
         // 3) Set up the frames of the view controllers to align
         //    with eachother inside the container view
-        var adminFrame :CGRect = AVc.view.frame;
-        adminFrame.origin.x = adminFrame.width;
-        CVc.view.frame = adminFrame;
-        adminFrame.origin.x = adminFrame.width;
-        ProfileVc.view.frame = adminFrame;
+        AVc.view.frame.origin.x = 0
+        ProfileVc.view.frame.origin.x = AVc.view.frame.size.width
+        CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
+        
         
         
         
         // 4) Finally set the size of the scroll view that contains the frames
-        var scrollWidth: CGFloat  = pages * adminFrame.width
-        var scrollHeight: CGFloat  = adminFrame.width
+        var scrollWidth: CGFloat  = pages * self.view.frame.size.width
+        var scrollHeight: CGFloat  = self.view.frame.size.height
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight);
+        self.scrollView!.sizeToFit()
     }
     
     override func didReceiveMemoryWarning() {
