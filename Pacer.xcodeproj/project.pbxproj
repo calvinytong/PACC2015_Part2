@@ -193,10 +193,10 @@
 			children = (
 				7C5EFF461AF9D9A600A8E425 /* AViewController.swift */,
 				7C5EFF471AF9D9A600A8E425 /* AViewController.xib */,
-				7C5EFF4A1AF9D9A600A8E425 /* CViewController.swift */,
-				7C5EFF4B1AF9D9A600A8E425 /* CViewController.xib */,
 				7C4DE0FC1B08737500514F7E /* ViewController.swift */,
 				7C4DE0FD1B08737500514F7E /* ViewController.xib */,
+				7C5EFF4A1AF9D9A600A8E425 /* CViewController.swift */,
+				7C5EFF4B1AF9D9A600A8E425 /* CViewController.xib */,
 				7C5EFF251AF9D8A800A8E425 /* Info.plist */,
 			);
 			name = "Supporting Files";

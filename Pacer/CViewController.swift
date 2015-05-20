@@ -5,7 +5,7 @@ class CViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.view.frame.size.width = UIScreen.mainScreen().bounds.width; // sets width
     }
     
     override func didReceiveMemoryWarning() {

@@ -42,13 +42,107 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pacer/ViewController.swift"
-            timestampString = "453665099.063173"
+            timestampString = "453830098.815466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pacer/ContainerViewController.swift"
+            timestampString = "453830357.578104"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "ContainerViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pacer.ContainerViewController.SIZE.setter : CoreGraphics.CGFloat"
+                  moduleName = "Pacer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Joseph/Documents/Github/PACC2015_Part2/Pacer/ContainerViewController.swift"
+                  timestampString = "453830370.808956"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "17">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pacer.ContainerViewController.SIZE.materializeForSet : CoreGraphics.CGFloat"
+                  moduleName = "Pacer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Joseph/Documents/Github/PACC2015_Part2/Pacer/ContainerViewController.swift"
+                  timestampString = "453830370.809079"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pacer.ContainerViewController.init (Pacer.ContainerViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; Pacer.ContainerViewController"
+                  moduleName = "Pacer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Joseph/Documents/Github/PACC2015_Part2/Pacer/ContainerViewController.swift"
+                  timestampString = "453830370.809177"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "89">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pacer.ContainerViewController.init (Pacer.ContainerViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; Pacer.ContainerViewController"
+                  moduleName = "Pacer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Joseph/Documents/Github/PACC2015_Part2/Pacer/ContainerViewController.swift"
+                  timestampString = "453830370.809267"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "62">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pacer/ContainerViewController.swift"
+            timestampString = "453831338.381554"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "ContainerViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

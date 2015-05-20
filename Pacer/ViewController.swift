@@ -9,19 +9,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var Cell: UITableViewCell!
     @IBOutlet var totalView: UIView!
     
-    
     var searchActive : Bool = false
     var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
     var filtered:[String] = []
+    var SIZE = UIScreen.mainScreen().bounds.width; // sets width
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.frame.size.width = SIZE;
+        tableView.frame.size.width = SIZE;
         
         /* Setup delegates */
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
-        
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {

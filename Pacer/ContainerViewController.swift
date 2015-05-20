@@ -15,18 +15,21 @@ class ContainerViewController: UIViewController {
     // Outlet used in storyboard
     @IBOutlet var scrollView: UIScrollView?;
     var pages: CGFloat = 3;
+    var WIDTH = UIScreen.mainScreen().bounds.width; // sets width
+    var HEIGHT = UIScreen.mainScreen().bounds.height; // sets height
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
-        if (PFUser.currentUser() == nil){ 
+        if (PFUser.currentUser() == nil){
             self.performSegueWithIdentifier("goToLogin", sender: self)
         }
-        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        self.view.frame.size.width = WIDTH;
+        self.view.frame.size.height = HEIGHT;
         
         // 1) Create the three views used in the swipe container view
         var AVc :AViewController =  AViewController(nibName: "AViewController", bundle: nil);
@@ -39,12 +42,10 @@ class ContainerViewController: UIViewController {
         self.addChildViewController(CVc);
         self.scrollView!.addSubview(CVc.view);
         CVc.didMoveToParentViewController(self);
-        
   
         self.addChildViewController(ProfileVc);
         self.scrollView!.addSubview(ProfileVc.view);
         ProfileVc.didMoveToParentViewController(self);
-    
         
         self.addChildViewController(AVc);
         self.scrollView!.addSubview(AVc.view);
@@ -53,17 +54,24 @@ class ContainerViewController: UIViewController {
         
         // 3) Set up the frames of the view controllers to align
         //    with eachother inside the container view
-        AVc.view.frame.origin.x = 0
-        ProfileVc.view.frame.origin.x = AVc.view.frame.size.width
-        //ProfileVc.view.frame.origin.x = 320;
-        //CVc.view.frame.origin.x = 640;
-        CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
         
+        AVc.view.frame.origin.x = 0;
+        AVc.view.frame.origin.y = 0;
+
+//        ProfileVc.view.frame.origin.x = AVc.view.frame.size.width
+        ProfileVc.view.frame.origin.x = WIDTH;
+        //ProfileVc.view.frame.origin.x = 320;
+//        ProfileVc.view.frame.origin.x = 375;
+
+        //CVc.view.frame.origin.x = 640;
+//        CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
+        CVc.view.frame.origin.x = WIDTH * 2;
         
         
         
         // 4) Finally set the size of the scroll view that contains the frames
-        var scrollWidth: CGFloat  = pages * self.view.frame.size.width
+        
+        var scrollWidth: CGFloat  = pages * WIDTH;
         var scrollHeight: CGFloat  = self.view.frame.size.height
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight);
         self.scrollView!.sizeToFit()
