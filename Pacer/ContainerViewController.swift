@@ -54,10 +54,10 @@ class ContainerViewController: UIViewController {
         // 3) Set up the frames of the view controllers to align
         //    with eachother inside the container view
         AVc.view.frame.origin.x = 0
-//        ProfileVc.view.frame.origin.x = AVc.view.frame.size.width
-        ProfileVc.view.frame.origin.x = 320;
-        CVc.view.frame.origin.x = 640;
-        //CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
+        ProfileVc.view.frame.origin.x = AVc.view.frame.size.width
+        //ProfileVc.view.frame.origin.x = 320;
+        //CVc.view.frame.origin.x = 640;
+        CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
         
         
         
