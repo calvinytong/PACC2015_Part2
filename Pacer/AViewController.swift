@@ -15,7 +15,7 @@ class AViewController: UIViewController, UITableViewDataSource{
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a 
         self.view.frame.size.width = SIZE;
-        updateUserInfo()
+        //updateUserInfo()
         userTable.reloadData()
     }
     
@@ -50,24 +50,23 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     @IBOutlet weak var userTable: UITableView!
     
-    var keyTable:[NSString] = []
+    var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
-    var valueDict = Dictionary<NSString, NSString>()
+    var valueDict = Dictionary<String, String>()
     
     func updateUserInfo(){
-        var currentUserQuery = PFQuery(className: "Player")
         var userProfile = PFUser.currentUser()!["profile"] as? PFObject
+        
         if (userProfile == nil){
             keyTable.append("what")
             valueDict.updateValue("fucking hell", forKey: "what")
         } else {
-            for key in userProfile!.allKeys() as NSArray {
+            var userPlayer: Player = Player(player: userProfile!)
+            for key in userPlayer.queryList {
+                keyTable.append(key)
+                valueDict.updateValue(userProfile![key]! as! String, forKey: key)
                 println(key)
-                if let keyStr = key as? NSString {
-                    keyTable.append(keyStr)
-                    valueDict.updateValue("fucking hell" as NSString, forKey: keyStr)
-                    println(keyStr)
-                }
+                
             }
             keyTable.append("what2")
             valueDict.updateValue("fucking hell2", forKey: "what2")
@@ -86,7 +85,7 @@ class AViewController: UIViewController, UITableViewDataSource{
         let rowContent = valueDict[rowTitle]
         
         cell.textLabel?.text = "\(rowTitle):"
-        cell.detailTextLabel?.text = "\(rowContent)"
+        cell.detailTextLabel?.text = "fuck fuck fuck fuck fuck \(rowContent)"
         return cell
     }
 }
