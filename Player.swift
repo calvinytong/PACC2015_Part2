@@ -13,9 +13,9 @@ class Player
 {
     var score : NSInteger
     var ObjectID : String
-    var query = PFQuery(className:"Player")
     var Object : PFObject
     var pedometerHelper : PedometerHelper
+    var query = PFQuery(className:"Player")
     
     init(name : String)
     {
@@ -38,6 +38,14 @@ class Player
                 print("we lost boyz")
             }
         }
+    }
+    
+    init(player : PFObject)
+    {
+        self.pedometerHelper = PedometerHelper()
+        self.score = 0
+        self.Object = player
+        self.ObjectID = Object.objectId!
     }
     
     func pushScore()
