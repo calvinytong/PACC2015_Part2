@@ -15,7 +15,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+        
         self.view.frame.size.width = SIZE;
         tableView.frame.size.width = SIZE;
         
@@ -42,7 +47,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        if(tableView.hidden == true)
+        {
+            tableView.hidden = false;
+        }
         filtered = data.filter({ (text) -> Bool in
             let tmp: NSString = text
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
@@ -74,7 +82,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = Cell;
+//        let cell = Cell;
+//        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell!
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
+        
         if(searchActive){
             cell.textLabel?.text = filtered[indexPath.row]
         } else {

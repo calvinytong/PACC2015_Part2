@@ -48,6 +48,8 @@ class AViewController: UIViewController, UITableViewDataSource{
         
     }
     
+    
+    //table stuff here
     @IBOutlet weak var userTable: UITableView!
     
     var keyTable:[String] = []
@@ -86,7 +88,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         
         let rowTitle = keyTable[indexPath.row]
         var rowContent: String = valueDict[rowTitle]!
