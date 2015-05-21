@@ -15,7 +15,7 @@ class AViewController: UIViewController, UITableViewDataSource{
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a 
         self.view.frame.size.width = SIZE;
-        //updateUserInfo()
+        updateUserInfo()
         userTable.reloadData()
     }
     
@@ -57,14 +57,21 @@ class AViewController: UIViewController, UITableViewDataSource{
     func updateUserInfo(){
         var userProfile = PFUser.currentUser()!["profile"] as? PFObject
         
+        
         if (userProfile == nil){
-            keyTable.append("what")
-            valueDict.updateValue("fucking hell", forKey: "what")
+            println("nil userProfile")
         } else {
-            var userPlayer: Player = Player(player: userProfile!)
-            for key in userPlayer.queryList {
-                keyTable.append(key)
-                valueDict.updateValue(userProfile![key]! as! String, forKey: key)
+            var userID: String = userProfile!.objectId!
+            
+            var userQuery = PFQuery(className: "Player")
+            var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
+            
+            
+        
+            for key in userPlayer.allKeys() {
+                var keyStr: String = key as! String
+                keyTable.append(keyStr)
+                valueDict.updateValue("\(userProfile!.objectForKey(keyStr))", forKey: keyStr)
                 println(key)
                 
             }
@@ -82,10 +89,15 @@ class AViewController: UIViewController, UITableViewDataSource{
         let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
         
         let rowTitle = keyTable[indexPath.row]
-        let rowContent = valueDict[rowTitle]
+        var rowContent: String = valueDict[rowTitle]!
+        let removedString = "Optional("
+        rowContent = rowContent.stringByReplacingOccurrencesOfString(removedString, withString: "")
+        rowContent = rowContent.stringByReplacingOccurrencesOfString(")", withString: "")
+        
         
         cell.textLabel?.text = "\(rowTitle):"
-        cell.detailTextLabel?.text = "fuck fuck fuck fuck fuck \(rowContent)"
+        cell.detailTextLabel?.text = rowContent
+        
         return cell
     }
 }

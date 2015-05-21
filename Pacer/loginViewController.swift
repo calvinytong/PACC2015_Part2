@@ -21,11 +21,16 @@ class loginViewController : UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passworldField: UITextField!
     
+    
     @IBAction func backgroundTap(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
+    /*
+    @IBAction func backgroundTap(sender: UITapGestureRecognizer) {
+    }
+    */
     
-        override func viewDidAppear(animated: Bool){
+    override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
         if (PFUser.currentUser() != nil){
             self.dismissViewControllerAnimated(true, completion: nil)

@@ -52,7 +52,6 @@
                                 </state>
                                 <connections>
                                     <action selector="pressSignUp:" destination="emb-lH-EYp" eventType="touchUpInside" id="MKN-YR-DUW"/>
-                                    <outletCollection property="gestureRecognizers" destination="ZXS-u0-7Tt" appends="YES" id="mCt-za-no4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-JO-Eav">
@@ -78,7 +77,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="ZXS-u0-7Tt" appends="YES" id="e0V-vE-eAF"/>
+                            <outletCollection property="gestureRecognizers" destination="iMN-v1-jeO" appends="YES" id="QNk-3a-BFj"/>
+                            <outletCollection property="gestureRecognizers" destination="iMN-v1-jeO" appends="YES" id="cny-ND-MjI"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="BHX-Bd-9Fs"/>
@@ -90,9 +90,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fa-e2-7MY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ZXS-u0-7Tt">
+                <tapGestureRecognizer id="iMN-v1-jeO">
                     <connections>
-                        <action selector="backgroundTap:" destination="emb-lH-EYp" id="8tw-hb-h0Z"/>
+                        <action selector="backgroundTap:" destination="emb-lH-EYp" id="puC-ga-NL7"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
