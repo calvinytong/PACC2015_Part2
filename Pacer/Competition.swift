@@ -20,8 +20,8 @@ class Competition
         ObjectID = ""
         self.Object = PFObject(className: "Competition")
         self.Object["name"] = name
-        self.Object["team1"] = Team1
-        self.Object["team2"] = Team2
+        self.Object["team1"] = Team1.Object
+        self.Object["team2"] = Team2.Object
         
         self.Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success)
