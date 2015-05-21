@@ -11,7 +11,6 @@ import Parse
 
 class Player
 {
-    var score : NSInteger
     var ObjectID : String
     var Object : PFObject
     var pedometerHelper : PedometerHelper
@@ -20,12 +19,11 @@ class Player
     init(name : String)
     {
         self.pedometerHelper = PedometerHelper()
-        self.score = 0
         self.ObjectID = ""
         self.Object = PFObject(className: "Player")
         Object["name"] = name
         Object["team"] = ""
-        Object["score"] = self.score
+        Object["score"] = 0
         
         Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success)
@@ -43,47 +41,52 @@ class Player
     init(player : PFObject)
     {
         self.pedometerHelper = PedometerHelper()
-        self.score = 0
         self.Object = player
         self.ObjectID = Object.objectId!
     }
     
-    func pushScore()
-    {
-        query.getObjectInBackgroundWithId(ObjectID) {
-            (playerObject: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                println(error)
-            } else if let playerObject = playerObject {
-                playerObject["score"] = self.score
-                playerObject.saveInBackground()
-                self.Object = playerObject
-            }
-            
-        }
-        
-    }
     
     func updateScore()
     {
-        self.score = self.pedometerHelper.steps
-        pushScore()
+        self.Object["score"] = self.pedometerHelper.steps
+        pushObject()
     }
     
-    func joinTeam(teamName : String)
+    func pushObject()
     {
         query.getObjectInBackgroundWithId(ObjectID) {
             (playerObject: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 println(error)
             } else if let playerObject = playerObject {
-                playerObject["team"] = teamName
-                playerObject.saveInBackground()
-                self.Object = playerObject
+                playerObject["name"] = self.Object["name"]
+                playerObject["team"] = self.Object["team"]
+                playerObject["score"] = self.Object["score"]
+            }
+
+        }
+    }
+    
+    func joinTeam(teamID : String)
+    {
+        self.Object["team"] = teamID
+        addPlayerToTeam(teamID)
+        pushObject()
+        pedometerHelper.startCollection()
+    }
+    
+    func addPlayerToTeam(id : String)
+    {
+        query.getObjectInBackgroundWithId(id) {
+            (teamObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                println(error)
+            } else if let teamObject = teamObject {
+                teamObject.addObject(self.Object, forKey: "players")
+                teamObject.saveInBackground()
             }
             
         }
-        pedometerHelper.startCollection()
     }
     
 }

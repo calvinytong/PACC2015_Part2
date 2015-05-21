@@ -12,7 +12,6 @@ import Parse
 class Team
 {
     var players : [Player]
-    var teamScore : NSInteger
     var ObjectID : String
     var Object : PFObject
     var query = PFQuery(className: "Team")
@@ -21,11 +20,10 @@ class Team
     {
         players = [Player]()
         ObjectID = ""
-        teamScore = 0
         self.Object = PFObject(className: "Team")
         self.Object["name"] = name
         self.Object["players"] = self.players
-        self.Object["score"] = self.teamScore
+        self.Object["score"] = 0
         self.Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success)
             {
@@ -39,45 +37,37 @@ class Team
         }
     }
     
-    func addPlayerToTeam(player : Player)
-    {
-        self.players.append(player)
-        query.getObjectInBackgroundWithId(ObjectID) {
-            (teamObject: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                println(error)
-            } else if let teamObject = teamObject {
-                teamObject["score"] = self.players
-                teamObject.saveInBackground()
-                self.Object = teamObject
-            }
-            
-        }
-    }
+
     
     func pushScore()
     {
-        self.teamScore = calcScore()
-        query.getObjectInBackgroundWithId(ObjectID) {
-            (teamObject: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                println(error)
-            } else if let teamObject = teamObject {
-                teamObject["score"] = self.teamScore
-                teamObject.saveInBackground()
-                self.Object = teamObject
-            }
-        }
-        
+       self.Object["score"] = calcScore()
+       pushObject()
         
     }
     
-    func calcScore() -> NSInteger
+    func pushObject()
     {
-        var tempscore = 0
+        query.getObjectInBackgroundWithId(ObjectID) {
+            (playerObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                println(error)
+            } else if let playerObject = playerObject {
+                playerObject["name"] = self.Object["name"]
+                playerObject["players"] = self.Object["players"]
+                playerObject["score"] = self.Object["score"]
+            }
+            
+        }
+
+    }
+    
+    func calcScore() -> Int
+    {
+        var tempscore : Int = 0
         for p in players
         {
-            tempscore = tempscore + p.score
+            tempscore = tempscore + (p.Object["score"] as! Int)
         }
         return tempscore
     }
