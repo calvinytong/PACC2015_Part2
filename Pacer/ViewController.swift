@@ -32,6 +32,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         searchBar.delegate = self
         
+
+        
         tableView.reloadData()
     }
     
@@ -131,9 +133,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             return keyList.count
         }
-        
-        if(searchActive) {
-            return filtered.count
+        else if(searchActive) {
+            return filtered.count + 1 // Create Team as well
         }
         return data.count;
     }
@@ -154,11 +155,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell;
         }
         
-        
-        if(searchActive){
-            cell.textLabel?.text = filtered[indexPath.row]
-        } else {
-            cell.textLabel?.text = data[indexPath.row];
+        else if(searchActive)
+        {
+            if(indexPath.row < filtered.count)
+            {
+                cell.textLabel?.text = filtered[indexPath.row]
+            }
+            else if(indexPath.row == (filtered.count))
+            {
+                cell.textLabel?.text = "Create New Team" // works
+            }
+
+        }
+        else
+        {
+            cell.textLabel?.text = data[indexPath.row]
         }
     
         return cell;
