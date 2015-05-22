@@ -48,26 +48,34 @@ class AViewController: UIViewController, UITableViewDataSource{
         
     }
     
+    
+    //table stuff here
     @IBOutlet weak var userTable: UITableView!
     
-    var keyTable:[NSString] = []
+    var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
-    var valueDict = Dictionary<NSString, NSString>()
+    var valueDict = Dictionary<String, String>()
     
     func updateUserInfo(){
-        var currentUserQuery = PFQuery(className: "Player")
         var userProfile = PFUser.currentUser()!["profile"] as? PFObject
+        
+        
         if (userProfile == nil){
-            keyTable.append("what")
-            valueDict.updateValue("fucking hell", forKey: "what")
+            println("nil userProfile")
         } else {
-            for key in userProfile!.allKeys() as NSArray {
+            var userID: String = userProfile!.objectId!
+            
+            var userQuery = PFQuery(className: "Player")
+            var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
+            
+            
+        
+            for key in userPlayer.allKeys() {
+                var keyStr: String = key as! String
+                keyTable.append(keyStr)
+                valueDict.updateValue("\(userProfile!.objectForKey(keyStr))", forKey: keyStr)
                 println(key)
-                if let keyStr = key as? NSString {
-                    keyTable.append(keyStr)
-                    valueDict.updateValue("fucking hell" as NSString, forKey: keyStr)
-                    println(keyStr)
-                }
+                
             }
             keyTable.append("what2")
             valueDict.updateValue("fucking hell2", forKey: "what2")
@@ -80,13 +88,18 @@ class AViewController: UIViewController, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         
         let rowTitle = keyTable[indexPath.row]
-        let rowContent = valueDict[rowTitle]
+        var rowContent: String = valueDict[rowTitle]!
+        let removedString = "Optional("
+        rowContent = rowContent.stringByReplacingOccurrencesOfString(removedString, withString: "")
+        rowContent = rowContent.stringByReplacingOccurrencesOfString(")", withString: "")
+        
         
         cell.textLabel?.text = "\(rowTitle):"
-        cell.detailTextLabel?.text = "\(rowContent)"
+        cell.detailTextLabel?.text = rowContent
+        
         return cell
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x3M-8i-5tE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x3M-8i-5tE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -52,7 +52,6 @@
                                 </state>
                                 <connections>
                                     <action selector="pressSignUp:" destination="emb-lH-EYp" eventType="touchUpInside" id="MKN-YR-DUW"/>
-                                    <outletCollection property="gestureRecognizers" destination="ZXS-u0-7Tt" appends="YES" id="mCt-za-no4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-JO-Eav">
@@ -78,7 +77,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="ZXS-u0-7Tt" appends="YES" id="e0V-vE-eAF"/>
+                            <outletCollection property="gestureRecognizers" destination="iMN-v1-jeO" appends="YES" id="QNk-3a-BFj"/>
+                            <outletCollection property="gestureRecognizers" destination="iMN-v1-jeO" appends="YES" id="cny-ND-MjI"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="BHX-Bd-9Fs"/>
@@ -90,9 +90,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fa-e2-7MY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ZXS-u0-7Tt">
+                <tapGestureRecognizer id="iMN-v1-jeO">
                     <connections>
-                        <action selector="backgroundTap:" destination="emb-lH-EYp" id="8tw-hb-h0Z"/>
+                        <action selector="backgroundTap:" destination="emb-lH-EYp" id="puC-ga-NL7"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -215,10 +215,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng6-jt-Dw5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.6381451034129777" green="0.41161077196295237" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="vFd-XG-Rc0"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>

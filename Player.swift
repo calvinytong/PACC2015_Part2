@@ -15,6 +15,7 @@ class Player
     var Object : PFObject
     var pedometerHelper : PedometerHelper
     var query = PFQuery(className:"Player")
+    let queryList: [String] = ["name", "team", "score"]
     
     init(name : String)
     {
@@ -36,6 +37,7 @@ class Player
                 print("we lost boyz")
             }
         }
+        pushObject()
     }
     
     init(player : PFObject)

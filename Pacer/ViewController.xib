@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Pacer" customModuleProvider="target">
             <connections>
-                <outlet property="Cell" destination="Z0l-fV-CJ6" id="Bz6-R9-G7z"/>
                 <outlet property="searchBar" destination="sB7-PN-mkJ" id="7ak-K6-uj4"/>
                 <outlet property="tableView" destination="CEZ-CT-0Pb" id="0CB-Bb-VI0"/>
                 <outlet property="totalView" destination="i5M-Pr-FkT" id="dgY-8O-jDi"/>
@@ -18,29 +17,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" id="sB7-PN-mkJ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <searchBar contentMode="redraw" placeholder="Join or Create a Team" id="sB7-PN-mkJ">
+                    <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
-                <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Z0l-fV-CJ6">
-                    <rect key="frame" x="0.0" y="44" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z0l-fV-CJ6" id="Ct2-NX-UYh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </tableViewCellContentView>
-                    <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </tableViewCell>
                 <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="CEZ-CT-0Pb">
-                    <rect key="frame" x="0.0" y="44" width="320" height="600"/>
+                    <rect key="frame" x="0.0" y="66" width="375" height="578"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="0.38910461061099111" blue="0.6474267140486698" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="408" y="151"/>
+            <point key="canvasLocation" x="407.5" y="150.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
