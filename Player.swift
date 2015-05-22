@@ -43,9 +43,13 @@ class Player
     init(player : PFObject)
     {
         self.pedometerHelper = PedometerHelper()
-        self.Object = player
-        self.ObjectID = Object.objectId!
+        self.ObjectID = player.objectId!
+        var userQuery = PFQuery(className: "Player")
+        var userPlayer: PFObject = userQuery.getObjectWithId(self.ObjectID)!
+        self.Object = userPlayer
     }
+    
+    
     
     
     func updateScore()

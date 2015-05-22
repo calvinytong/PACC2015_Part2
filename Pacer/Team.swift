@@ -39,6 +39,7 @@ class Team
     
     init(team : PFObject)
     {
+        
         self.Object = team
         self.ObjectID = self.Object.objectId!
         self.players = [Player]()

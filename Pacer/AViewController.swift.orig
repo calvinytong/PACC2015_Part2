@@ -45,8 +45,6 @@ class AViewController: UIViewController, UITableViewDataSource{
             self.welcome.text = PFUser.currentUser() == nil ? "" : "Hello \(PFUser.currentUser()!.username!)!"
             self.labelSize(self.welcome)
         })
-        updateUserInfo()
-        userTable.reloadData()
         
     }
     
@@ -57,40 +55,31 @@ class AViewController: UIViewController, UITableViewDataSource{
     //var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
     var valueDict = Dictionary<String, String>()
-    let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
-    let keyList: [String] = ["name", "team", "competition", "score"]
+    let defaultDict: [String: String] = ["team" : "you're not on a team!"]
+    let keyList: [String] = ["name", "team", "score"]
     
     let removedString = "Optional("
+    let blankSpace: String = "\u{2422}"
     
     func objectStringCleaner(input: String) -> String{
         
-        if count(input) < count(removedString) + 1{
-            return input
-        }
-        
-        
-        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
+        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, 8)
         var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
         return result.substringToIndex(result.endIndex.predecessor())
     }
     
     func updateUserInfo(){
-        var userProfileReference = PFUser.currentUser()!["profile"] as? PFObject
+        var userProfile = PFUser.currentUser()!["profile"] as? PFObject
         
-        if (userProfileReference == nil){
+        if (userProfile == nil){
             println("nil userProfile")
         } else {
-            //var userID: String = userProfile!.objectId!
-            //var userQuery = PFQuery(className: "Player")
-            //var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
-            var userProfile: Player = Player(player: userProfileReference!)
+            var userID: String = userProfile!.objectId!
+            var userQuery = PFQuery(className: "Player")
+            var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
+            
             for key in keyList {
-                if key == "competition"{
-                    valueDict.updateValue("", forKey: key)
-                    continue
-                }
-                
-                valueDict.updateValue("\(userProfile.Object.objectForKey(key))", forKey: key)
+                valueDict.updateValue("\(userProfile!.objectForKey(key))", forKey: key)
             }
         }
     }
@@ -100,16 +89,20 @@ class AViewController: UIViewController, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+<<<<<<< HEAD
         var cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+=======
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
+>>>>>>> bb3db2cd7983b750866dde50dada441aad282bc9
         
         let rowTitle = keyList[indexPath.row]
-        var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
-        if rowContent.isEmpty{
+        var rowContent: String = valueDict[rowTitle]!
+        if rowContent == removedString + ")"{
             rowContent = defaultDict[rowTitle]!
             cell.backgroundColor = UIColor.redColor()
         }
-        cell.textLabel?.text = rowTitle
-        cell.detailTextLabel?.text = rowContent
+        cell.textLabel?.text = "\(rowTitle):"
+        cell.detailTextLabel?.text = objectStringCleaner(rowContent)
         
         return cell
     }
