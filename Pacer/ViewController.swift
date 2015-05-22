@@ -1,5 +1,7 @@
 
 import UIKit
+import Parse
+
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
@@ -15,8 +17,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        updateUserInfo()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -28,6 +31,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        
+        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -78,7 +83,55 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+
+    //var keyTable:[String] = []
+    //var introDict = Dictionary<String, String>()
+    var valueDict = Dictionary<String, String>()
+    let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
+    let keyList: [String] = ["name", "team", "competition", "score"]
+    
+    let removedString = "Optional("
+    
+    func objectStringCleaner(input: String) -> String{
+        
+        if count(input) < count(removedString) + 1{
+            return input
+        }
+        
+        
+        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
+        var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
+        return result.substringToIndex(result.endIndex.predecessor())
+    }
+    
+    func updateUserInfo(){
+        var userProfileReference = PFUser.currentUser()!["profile"] as? PFObject
+        
+        if (userProfileReference == nil){
+            println("nil userProfile")
+        } else {
+            //var userID: String = userProfile!.objectId!
+            //var userQuery = PFQuery(className: "Player")
+            //var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
+            var userProfile: Player = Player(player: userProfileReference!)
+            for key in keyList {
+                if key == "competition"{
+                    valueDict.updateValue("", forKey: key)
+                    continue
+                }
+                
+                valueDict.updateValue("\(userProfile.Object.objectForKey(key))", forKey: key)
+            }
+        }
+    }
+
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(!searchActive)
+        {
+            return keyList.count
+        }
+        
         if(searchActive) {
             return filtered.count
         }
@@ -86,9 +139,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = Cell;
-//        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell!
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
+        var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
+        
+        if(!searchActive) // checks if team exists
+        {
+            let rowTitle = keyList[indexPath.row]
+            var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
+            if rowContent.isEmpty{
+                rowContent = defaultDict[rowTitle]!
+                cell.backgroundColor = UIColor.redColor()
+            }
+            cell.textLabel?.text = rowTitle
+            cell.detailTextLabel?.text = rowContent
+            return cell;
+        }
+        
         
         if(searchActive){
             cell.textLabel?.text = filtered[indexPath.row]
