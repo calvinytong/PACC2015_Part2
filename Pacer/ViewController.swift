@@ -63,11 +63,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
+        /*
         if(filtered.count == 0){
             searchActive = false;
         } else {
             searchActive = true;
         }
+        */
+        searchActive = true;
         self.tableView.reloadData()
     }
     
@@ -133,7 +136,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             return keyList.count
         }
-        else if(searchActive) {
+        else if(searchActive)
+        {
             return filtered.count + 1 // Create Team as well
         }
         return data.count;
@@ -154,7 +158,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.detailTextLabel?.text = rowContent
             return cell;
         }
-        
         else if(searchActive)
         {
             if(indexPath.row < filtered.count)
@@ -163,9 +166,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             else if(indexPath.row == (filtered.count))
             {
-                cell.textLabel?.text = "Create New Team" // works
+                cell.textLabel?.text = "Create New Team!" // works
             }
-
         }
         else
         {
