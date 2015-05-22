@@ -42,7 +42,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
         dispatch_async(dispatch_get_main_queue(), {
-            self.welcome.text = PFUser.currentUser() == nil ? "" : "Hello \(PFUser.currentUser()!.username!)"
+            self.welcome.text = PFUser.currentUser() == nil ? "" : "Hello \(PFUser.currentUser()!.username!)!"
             self.labelSize(self.welcome)
         })
         
@@ -50,53 +50,53 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     @IBOutlet weak var userTable: UITableView!
     
-    var keyTable:[String] = []
+    //var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
     var valueDict = Dictionary<String, String>()
+    let defaultDict: [String: String] = ["team" : "you're not on a team!"]
+    let keyList: [String] = ["name", "team", "score"]
+    
+    let removedString = "Optional("
+    let blankSpace: String = "\u{2422}"
+    
+    func objectStringCleaner(input: String) -> String{
+        
+        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, 8)
+        var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
+        return result.substringToIndex(result.endIndex.predecessor())
+    }
     
     func updateUserInfo(){
         var userProfile = PFUser.currentUser()!["profile"] as? PFObject
-        
         
         if (userProfile == nil){
             println("nil userProfile")
         } else {
             var userID: String = userProfile!.objectId!
-            
             var userQuery = PFQuery(className: "Player")
             var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
             
-            
-        
-            for key in userPlayer.allKeys() {
-                var keyStr: String = key as! String
-                keyTable.append(keyStr)
-                valueDict.updateValue("\(userProfile!.objectForKey(keyStr))", forKey: keyStr)
-                println(key)
-                
+            for key in keyList {
+                valueDict.updateValue("\(userProfile!.objectForKey(key))", forKey: key)
             }
-            keyTable.append("what2")
-            valueDict.updateValue("fucking hell2", forKey: "what2")
-            println("Done with keys")
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return keyTable.count
+        return keyList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        var cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
         
-        let rowTitle = keyTable[indexPath.row]
+        let rowTitle = keyList[indexPath.row]
         var rowContent: String = valueDict[rowTitle]!
-        let removedString = "Optional("
-        rowContent = rowContent.stringByReplacingOccurrencesOfString(removedString, withString: "")
-        rowContent = rowContent.stringByReplacingOccurrencesOfString(")", withString: "")
-        
-        
+        if rowContent == removedString + ")"{
+            rowContent = defaultDict[rowTitle]!
+            cell.backgroundColor = UIColor.redColor()
+        }
         cell.textLabel?.text = "\(rowTitle):"
-        cell.detailTextLabel?.text = rowContent
+        cell.detailTextLabel?.text = objectStringCleaner(rowContent)
         
         return cell
     }
