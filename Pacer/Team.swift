@@ -37,7 +37,19 @@ class Team
         }
     }
     
-
+    init(team : PFObject)
+    {
+        self.Object = team
+        self.ObjectID = self.Object.objectId!
+        self.players = [Player]()
+        var temparray : NSArray = self.Object["players"] as! NSArray
+        for p in temparray
+        {
+            self.players.append(p as! Player)
+        }
+        
+    }
+    
     
     func pushScore()
     {

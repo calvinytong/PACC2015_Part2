@@ -36,4 +36,10 @@ class Competition
         }
     }
     
+    init(Competition : PFObject)
+    {
+        self.Object = Competition
+        self.ObjectID = Object.objectId!
+    }
+    
 }

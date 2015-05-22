@@ -18,17 +18,37 @@ class ParseManager
         
     }
     
-    //    func updateDataBase(toUpdate : String, id : String, key : String)
-    //    {
-    //        var query = PFQuery(className: toUpdate)
-    //        query.getObjectInBackgroundWithId(id) {
-    //            (playerObject: PFObject?, error: NSError?) -> Void in
-    //            if error != nil {
-    //                println(error)
-    //            } else if let playerObject = playerObject {
-    //                playerObject["score"] = self.score
-    //                playerObject.saveInBackground()
-    //            }
-    //        }
-    //    }
+    func pullObject(id : String, type : String) -> PFObject
+    {
+        var tempobj : PFObject = PFObject()
+        var query = PFQuery(className: type)
+        query.getObjectInBackgroundWithId(id) {
+            (playerObject: PFObject?, error: NSError?) -> Void in
+            if error != nil
+            {
+                println(error)
+            }
+            else if let playerObject = playerObject
+            {
+                tempobj = playerObject
+                
+            }
+        }
+        return tempobj
+    }
+    
+    func pullPlayer(id : String) -> Player
+    {
+        return Player(player: pullObject(id, type: "Player"))
+    }
+    
+    func pullTeam(id : String) -> Team
+    {
+        return Team(team : pullObject(id, type: "Team"))
+    }
+    
+    func pullComp(id : String) -> Competition
+    {
+        return Competition(Competition: pullObject(id, type: "Competition"))
+    }
 }

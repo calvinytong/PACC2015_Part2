@@ -48,6 +48,8 @@ class AViewController: UIViewController, UITableViewDataSource{
         
     }
     
+    
+    //table stuff here
     @IBOutlet weak var userTable: UITableView!
     
     //var keyTable:[String] = []

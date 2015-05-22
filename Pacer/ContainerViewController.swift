@@ -36,6 +36,7 @@ class ContainerViewController: UIViewController {
         var ProfileVc :ViewController =  ViewController(nibName: "ViewController", bundle: nil);
         var CVc :CViewController =  CViewController(nibName: "CViewController", bundle: nil);
         
+
         
         // 2) Add in each view to the container view hierarchy
         //    Add them in opposite order since the view hieracrhy is a stack
@@ -46,6 +47,12 @@ class ContainerViewController: UIViewController {
         self.addChildViewController(ProfileVc);
         self.scrollView!.addSubview(ProfileVc.view);
         ProfileVc.didMoveToParentViewController(self);
+
+        /*
+        self.addChildViewController(TestVc);
+        self.scrollView!.addSubview(TestVc.view);
+        TestVc.didMoveToParentViewController(self);
+      */
         
         self.addChildViewController(AVc);
         self.scrollView!.addSubview(AVc.view);
