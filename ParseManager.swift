@@ -37,6 +37,30 @@ class ParseManager
         return tempobj
     }
     
+    func pullAllObjects(type : String) -> [PFObject]
+    {
+        var temparray : [PFObject] = [PFObject]()
+        var query = PFQuery(className: type)
+        //gets first 100 objects
+         query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                // The find succeeded.
+                println("Successfully retrieved \(objects!.count) scores.")
+                // Do something with the found objects
+                if let objects = objects as? [PFObject] {
+                    temparray = objects
+                }
+            } else {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+                return
+            }
+        }
+        return temparray
+    }
+    
     func pullPlayer(id : String) -> Player
     {
         return Player(player: pullObject(id, type: "Player"))
@@ -50,5 +74,16 @@ class ParseManager
     func pullComp(id : String) -> Competition
     {
         return Competition(Competition: pullObject(id, type: "Competition"))
+    }
+    
+    func pullTeams() -> [Team]
+    {
+        var teamarray : [Team] = [Team]()
+        var temparray : [PFObject] = pullAllObjects("Team")
+        for o in temparray
+        {
+            teamarray.append(Team(team: o))
+        }
+        return teamarray
     }
 }
