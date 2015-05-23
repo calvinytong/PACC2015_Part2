@@ -79,7 +79,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -87,7 +86,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    
 
     //var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
@@ -102,7 +100,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if count(input) < count(removedString) + 1{
             return input
         }
-        
         
         let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
         var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
@@ -129,7 +126,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searchActive)
@@ -176,4 +172,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         return cell;
     }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        NSLog("You selected cell number: \(indexPath.row)!")
+//        self.performSegueWithIdentifier("yourIdentifier", sender: self)
+        var parentVC = parentViewController!
+        parentVC.performSegueWithIdentifier("goToCreateTeam", sender: self)
+    }
 }
+
+

@@ -135,6 +135,8 @@ class AViewController: UIViewController, UITableViewDataSource{
         cell.textLabel?.text = rowTitle
         cell.detailTextLabel?.text = rowContent
         
+
+        
         return cell
     }
 }
