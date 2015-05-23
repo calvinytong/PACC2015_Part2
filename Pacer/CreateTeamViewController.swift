@@ -34,6 +34,11 @@ class CreateTeamViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func doneBtnClick(sender: UIButton) {
+        createTeam()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func createTeam() {
         /*
         var user = PFUser()
@@ -60,7 +65,8 @@ class CreateTeamViewController: UIViewController {
             }
         }
         */
-        var newteam = PFObject()
+        var newTeam = PFObject()
+//        newTeam.
     }
     
     /*
