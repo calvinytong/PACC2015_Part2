@@ -99,6 +99,22 @@ class AViewController: UIViewController, UITableViewDataSource{
         return keyList.count
     }
     
+    func leaveTeam(sender: UIButton){
+        var userProfile: Player = Player(player: (PFUser.currentUser()!["profile"] as? PFObject)!)
+        userProfile.Object["team"] = ""
+        userProfile.pushObject()
+    }
+    
+    func createLeaveButton() -> UIButton{
+        var leaveTeamButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        leaveTeamButton.frame = CGRectMake(310, -5, 55, 55)
+        leaveTeamButton.showsTouchWhenHighlighted = true
+        leaveTeamButton.setTitle("leave", forState: UIControlState.Normal)
+        leaveTeamButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        leaveTeamButton.addTarget(self, action: "leaveTeam:", forControlEvents: UIControlEvents.TouchUpInside)
+        return leaveTeamButton
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
         
@@ -108,6 +124,14 @@ class AViewController: UIViewController, UITableViewDataSource{
             rowContent = defaultDict[rowTitle]!
             cell.backgroundColor = UIColor.redColor()
         }
+        
+        if (rowTitle == "team"){
+            
+            var leaveTeamButton = createLeaveButton()
+            cell.addSubview(leaveTeamButton)
+            
+        }
+        
         cell.textLabel?.text = rowTitle
         cell.detailTextLabel?.text = rowContent
         
