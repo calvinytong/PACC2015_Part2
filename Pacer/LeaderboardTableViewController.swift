@@ -37,11 +37,9 @@ class LeaderboardTableViewController: UITableViewController,UISearchBarDelegate 
         query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
             self.data = results as? [PFObject]
             self.tableView.reloadData()
-
         }
         
     }
-    
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -80,5 +78,14 @@ class LeaderboardTableViewController: UITableViewController,UISearchBarDelegate 
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         search(searchText: searchText)
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        NSLog("You selected cell number: \(indexPath.row)!")
+        if(true)
+        {
+            
+        }
     }
 }

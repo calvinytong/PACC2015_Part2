@@ -40,14 +40,16 @@ class ContainerViewController: UIViewController {
         
         // 2) Add in each view to the container view hierarchy
         //    Add them in opposite order since the view hieracrhy is a stack
-/*
+
         self.addChildViewController(CVc);
         self.scrollView!.addSubview(CVc.view);
         CVc.didMoveToParentViewController(self);
-*/
+
+        /*
         self.addChildViewController(LeaderboardVc);
         self.scrollView!.addSubview(LeaderboardVc.view);
         LeaderboardVc.didMoveToParentViewController(self);
+        */
         
         self.addChildViewController(ProfileVc);
         self.scrollView!.addSubview(ProfileVc.view);
@@ -71,9 +73,9 @@ class ContainerViewController: UIViewController {
 
         //CVc.view.frame.origin.x = 640;
 //        CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
-//        CVc.view.frame.origin.x = WIDTH * 2;
+        CVc.view.frame.origin.x = WIDTH * 2;
         
-        LeaderboardVc.view.frame.origin.x = WIDTH * 2;
+        //LeaderboardVc.view.frame.origin.x = WIDTH * 2;
         
         // 4) Finally set the size of the scroll view that contains the frames
         
