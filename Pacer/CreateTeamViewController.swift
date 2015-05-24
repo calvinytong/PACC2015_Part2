@@ -9,6 +9,15 @@
 import UIKit
 import Parse
 
+
+func initializeErrorAlert() -> UIAlertView{
+    var usernameNotFoundAlert: UIAlertView = UIAlertView()
+    usernameNotFoundAlert.title = errorTitle
+    usernameNotFoundAlert.message = "The following users don't exist: "
+    usernameNotFoundAlert.addButtonWithTitle(errorButtonString)
+    return usernameNotFoundAlert
+}
+
 class CreateTeamViewController: UIViewController {
 
     @IBOutlet weak var teamNameField: UITextField!
@@ -18,11 +27,22 @@ class CreateTeamViewController: UIViewController {
     @IBOutlet weak var teammate4: UITextField!
     
     
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    
+    
+    func getUsernameArray() -> [String]{
+        var array = [String]()
+        array.append(teammate1.text)
+        array.append(teammate2.text)
+        array.append(teammate3.text)
+        array.append(teammate4.text)
+        return array
     }
 
     @IBAction func cancelBtnClick(sender: UIButton) {
@@ -31,52 +51,61 @@ class CreateTeamViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func doneBtnClick(sender: UIButton) {
-        createTeam()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if createTeam() {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
-    func createTeam() {
+    func addUsertoTeam(username: String, team: Team)-> Bool{
+        
+        if username.isEmpty{
+            return true
+        }
+        var userQueryer: PFQuery = PFQuery(className: "Player")
+        userQueryer.whereKey("name", containsString: username)
+        var resultArray: Array = userQueryer.findObjects()!
+        
         /*
-        var user = PFUser()
+        Unforunately, I can only search if the name entry of Player contains a string or not, and not
+        if it matches exactly. I could do matches exactly with regex, but that adds the problem of if
+        the user tries create a username with a part that could be intepreted as regex, which could result
+        in unpredictable results.
+        */
         
-        user.username = createUsername.text
-        user.password = createPassword.text
-        user.email = createEmail.text
-        let userplayer = Player(name : createUsername.text)
-        user["profile"] = userplayer.Object
-        
-        
-        user.signUpInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError?) -> Void in
-            if let error = error {
-                let errorString = error.userInfo?["error"] as! String?
-                var failAlert: UIAlertView = UIAlertView()
-                failAlert.title = "Error Creating Account"
-                failAlert.message = errorString!
-                failAlert.addButtonWithTitle("Try Again")
-                failAlert.show()
-            } else {
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
+        println(resultArray)
+        for obj in resultArray{
+            var nameString: String = obj["name"] as! String
+            nameString = objectStringCleaner(nameString)
+            
+            //Theoretically, if a match contains the username string, and is the same length as
+            //the username string, it should be the same string.
+            
+            if count(nameString) == count(username){
+                //team.Object["players"]?.add()
+                return true
             }
         }
-        */
-        var newTeam = PFObject()
-//        newTeam.
+        return false
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func createTeam() -> Bool{
+        var newTeam: Team = Team(name: teamNameField.text)
+        var usernameNotFoundAlert = initializeErrorAlert()
+        var usernameSuccess = true
+        
+        for user in getUsernameArray() {
+            if !addUsertoTeam(user, team: newTeam) {
+                usernameSuccess = false
+                usernameNotFoundAlert.message = usernameNotFoundAlert.message! + user + ","
+            }
+        }
+        if (!usernameSuccess){
+            usernameNotFoundAlert.message = usernameNotFoundAlert.message!.substringToIndex(usernameNotFoundAlert.message!.endIndex.predecessor())
+            usernameNotFoundAlert.show()
+        }
+        return usernameSuccess
     }
-    */
-
 }

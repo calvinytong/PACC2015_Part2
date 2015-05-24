@@ -3,6 +3,19 @@
 import UIKit
 import Parse
 
+let removedString = "Optional("
+
+func objectStringCleaner(input: String) -> String{
+    
+    if count(input) < count(removedString) + 1{
+        return input
+    }
+    
+    
+    let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
+    var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
+    return result.substringToIndex(result.endIndex.predecessor())
+}
 
 class AViewController: UIViewController, UITableViewDataSource{
     
@@ -60,19 +73,6 @@ class AViewController: UIViewController, UITableViewDataSource{
     let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
     let keyList: [String] = ["name", "team", "competition", "score"]
     
-    let removedString = "Optional("
-    
-    func objectStringCleaner(input: String) -> String{
-        
-        if count(input) < count(removedString) + 1{
-            return input
-        }
-        
-        
-        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
-        var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
-        return result.substringToIndex(result.endIndex.predecessor())
-    }
     
     func updateUserInfo(){
         var userProfileReference = PFUser.currentUser()!["profile"] as? PFObject
