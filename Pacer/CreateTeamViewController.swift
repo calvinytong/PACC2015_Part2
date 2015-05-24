@@ -65,8 +65,10 @@ class CreateTeamViewController: UIViewController {
             }
         }
         */
-        var newTeam = PFObject()
-//        newTeam.
+        var newTeam = PFObject(className: "Team")
+        newTeam.addUniqueObject(teamNameField.text, forKey: "teamName")
+        var players: [String] = [teammate1.text, teammate2.text, teammate3.text, teammate4.text]
+        
     }
     
     /*
