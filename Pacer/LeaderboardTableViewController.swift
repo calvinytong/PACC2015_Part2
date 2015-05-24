@@ -1,18 +1,17 @@
-// Leaderboard
-
+//
+//  LeaderboardTableViewController.swift
+//  Pacer
+//
+//  Created by Joseph Zhong on 5/23/15.
+//  Copyright (c) 2015 Joseph Zhong. All rights reserved.
+//
 
 import UIKit
 import Parse
 
-
-class CViewController: UIViewController, UISearchBarDelegate {
-    
-    @IBOutlet weak var tableView: UITableView!
+class LeaderboardTableViewController: UITableViewController,UISearchBarDelegate {
+        
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var detailsBtn: UIButton!
-    @IBOutlet weak var challengeBtn: UIButton!
-    
-    
     var searchActive : Bool = false
     var data:[PFObject]!
     var filtered:[PFObject]!
@@ -42,11 +41,11 @@ class CViewController: UIViewController, UISearchBarDelegate {
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(self.data != nil){
             return self.data.count
         }
@@ -54,7 +53,7 @@ class CViewController: UIViewController, UISearchBarDelegate {
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         let obj = self.data[indexPath.row]
         cell.textLabel!.text = obj["text"] as? String
@@ -81,16 +80,12 @@ class CViewController: UIViewController, UISearchBarDelegate {
         search(searchText: searchText)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        NSLog("You selected cell number: \(indexPath.row)!") // WTF THIS WAS WORKING A SECOND AGO
-    }
-    
-    @IBAction func challengeClick(sender: AnyObject) {
-        // check if team exists -> sends challenge
-    }
-
-    @IBAction func detailsClick(sender: AnyObject) {
-        // check if team exists -> navigates to info page
+        NSLog("You selected cell number: \(indexPath.row)!")
+        if(true)
+        {
+            
+        }
     }
 }
