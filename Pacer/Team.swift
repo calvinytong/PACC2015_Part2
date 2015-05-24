@@ -67,7 +67,7 @@ class Team
                 println(error)
             } else if let playerObject = playerObject {
                 playerObject["name"] = self.Object["name"]
-                playerObject["players"] = self.players
+                playerObject["players"] = self.Object["players"]
                 playerObject["score"] = self.Object["score"]
             }
             

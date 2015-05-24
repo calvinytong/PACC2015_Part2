@@ -78,11 +78,16 @@ class CreateTeamViewController: UIViewController {
         println(resultArray)
         for obj in resultArray{
             var nameString: String = obj["name"] as! String
+            println(nameString)
             nameString = objectStringCleaner(nameString)
             
             
             if nameString == username{
-                team.players.append(obj as! PFObject)
+                var playerArray: NSArray = team.Object["players"] as! NSArray
+                var newArray = NSMutableArray()
+                newArray.addObjectsFromArray(playerArray as [AnyObject])
+                newArray.addObject(obj)
+                team.Object["players"] = newArray as NSArray
                 return true
             }
         }
