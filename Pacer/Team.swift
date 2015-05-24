@@ -11,14 +11,14 @@ import Parse
 
 class Team
 {
-    var players : [Player]
+    var players : [PFObject]
     var ObjectID : String
     var Object : PFObject
     var query = PFQuery(className: "Team")
     
     init(name : String)
     {
-        players = [Player]()
+        players = [PFObject]()
         ObjectID = ""
         self.Object = PFObject(className: "Team")
         self.Object["name"] = name
@@ -42,11 +42,11 @@ class Team
         
         self.Object = team
         self.ObjectID = self.Object.objectId!
-        self.players = [Player]()
+        self.players = [PFObject]()
         var temparray : NSArray = self.Object["players"] as! NSArray
         for p in temparray
         {
-            self.players.append(p as! Player)
+            self.players.append(p as! PFObject)
         }
         
     }
@@ -67,7 +67,7 @@ class Team
                 println(error)
             } else if let playerObject = playerObject {
                 playerObject["name"] = self.Object["name"]
-                playerObject["players"] = self.Object["players"]
+                playerObject["players"] = self.players
                 playerObject["score"] = self.Object["score"]
             }
             
@@ -80,7 +80,7 @@ class Team
         var tempscore : Int = 0
         for p in players
         {
-            tempscore = tempscore + (p.Object["score"] as! Int)
+            tempscore = tempscore + (p["score"] as! Int)
         }
         return tempscore
     }

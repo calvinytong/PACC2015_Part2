@@ -80,11 +80,9 @@ class CreateTeamViewController: UIViewController {
             var nameString: String = obj["name"] as! String
             nameString = objectStringCleaner(nameString)
             
-            //Theoretically, if a match contains the username string, and is the same length as
-            //the username string, it should be the same string.
             
-            if count(nameString) == count(username){
-                //team.Object["players"]?.add()
+            if nameString == username{
+                team.players.append(obj as! PFObject)
                 return true
             }
         }
@@ -105,7 +103,11 @@ class CreateTeamViewController: UIViewController {
         if (!usernameSuccess){
             usernameNotFoundAlert.message = usernameNotFoundAlert.message!.substringToIndex(usernameNotFoundAlert.message!.endIndex.predecessor())
             usernameNotFoundAlert.show()
+        } else {
+        
+            newTeam.pushObject()
         }
+        
         return usernameSuccess
     }
 }
