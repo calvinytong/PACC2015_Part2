@@ -65,28 +65,26 @@ class CreateTeamViewController: UIViewController {
             return true
         }
         var userQueryer: PFQuery = PFQuery(className: "Player")
-        userQueryer.whereKey("name", containsString: username)
+        userQueryer.whereKey("name", equalTo: username)
         var resultArray: Array = userQueryer.findObjects()!
         
         var teamQueryer: PFQuery = PFQuery(className: "Team")
         var teamObject: PFObject = teamQueryer.getObjectWithId(team.Object.objectId!)!
-        /*
-        Unforunately, I can only search if the name entry of Player contains a string or not, and not
-        if it matches exactly. I could do matches exactly with regex, but that adds the problem of if
-        the user tries create a username with a part that could be intepreted as regex, which could result
-        in unpredictable results.
-        */
         
         println(resultArray)
         for obj in resultArray{
+            var pfobj: PFObject = obj as! PFObject
             var nameString: String = obj["name"] as! String
             println(nameString)
             nameString = objectStringCleaner(nameString)
             
             
             if nameString == username{
-                teamObject.addObject(obj as! PFObject, forKey: "players")
-                println("Save status \(teamObject.save())")
+                teamObject.addObject(pfobj, forKey: "players")
+                teamObject.saveInBackground()
+                pfobj["team"] = teamObject.objectId
+                pfobj.saveInBackground()
+                
                 return true
             }
         }
@@ -94,9 +92,13 @@ class CreateTeamViewController: UIViewController {
     }
     
     func createTeam() -> Bool{
+        
+        
+        
         var newTeam: Team = Team(name: teamNameField.text)
         var usernameNotFoundAlert = initializeErrorAlert()
         var usernameSuccess = true
+        
         
         for user in getUsernameArray() {
             if !addUsertoTeam(user, team: newTeam) {
@@ -109,7 +111,7 @@ class CreateTeamViewController: UIViewController {
             usernameNotFoundAlert.show()
         } else {
         
-            newTeam.pushObject()
+            
         }
         
         return usernameSuccess
