@@ -14,10 +14,16 @@ class CViewController: UIViewController, UISearchBarDelegate {
     
     
     var searchActive : Bool = false
-    var data:[PFObject]!
-    var filtered:[PFObject]!
+    var mainParseManager: ParseManager = ParseManager()
+    
+    var data:[Team]!
+
+    
+    
+    var filtered:[Team]!
     override func viewDidLoad() {
         super.viewDidLoad()
+        data = mainParseManager.pullTeams()
         
         searchBar.delegate = self
         
@@ -36,7 +42,7 @@ class CViewController: UIViewController, UISearchBarDelegate {
             query.whereKey("name", containsString: searchText)
         }
         query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
-            self.data = results as? [PFObject]
+            self.data = (results as? [Team])!
             self.tableView.reloadData()
         }
         
@@ -47,17 +53,14 @@ class CViewController: UIViewController, UISearchBarDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.data != nil){
-            return self.data.count
-        }
-        return 0
+        return self.data.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         let obj = self.data[indexPath.row]
-        cell.textLabel!.text = obj["text"] as? String
+        cell.textLabel!.text = data[indexPath.row].Object["name"] as? String
         return cell
     }
     
@@ -74,7 +77,7 @@ class CViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = false
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -83,14 +86,10 @@ class CViewController: UIViewController, UISearchBarDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        NSLog("You selected cell number: \(indexPath.row)!") // WTF THIS WAS WORKING A SECOND AGO
-    }
-    
-    @IBAction func challengeClick(sender: AnyObject) {
-        // check if team exists -> sends challenge
-    }
-
-    @IBAction func detailsClick(sender: AnyObject) {
-        // check if team exists -> navigates to info page
+        NSLog("You selected cell number: \(indexPath.row)!")
+        if(true)
+        {
+            NSLog("hello joseph");
+        }
     }
 }
