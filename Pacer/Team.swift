@@ -69,6 +69,7 @@ class Team
                 playerObject["name"] = self.Object["name"]
                 playerObject["players"] = self.Object["players"]
                 playerObject["score"] = self.Object["score"]
+                playerObject.saveInBackground()
             }
             
         }

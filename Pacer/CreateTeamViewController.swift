@@ -68,6 +68,8 @@ class CreateTeamViewController: UIViewController {
         userQueryer.whereKey("name", containsString: username)
         var resultArray: Array = userQueryer.findObjects()!
         
+        var teamQueryer: PFQuery = PFQuery(className: "Team")
+        var teamObject: PFObject = teamQueryer.getObjectWithId(team.Object.objectId!)!
         /*
         Unforunately, I can only search if the name entry of Player contains a string or not, and not
         if it matches exactly. I could do matches exactly with regex, but that adds the problem of if
@@ -83,11 +85,8 @@ class CreateTeamViewController: UIViewController {
             
             
             if nameString == username{
-                var playerArray: NSArray = team.Object["players"] as! NSArray
-                var newArray = NSMutableArray()
-                newArray.addObjectsFromArray(playerArray as [AnyObject])
-                newArray.addObject(obj)
-                team.Object["players"] = newArray as NSArray
+                teamObject.addObject(obj as! PFObject, forKey: "players")
+                println("Save status \(teamObject.save())")
                 return true
             }
         }
