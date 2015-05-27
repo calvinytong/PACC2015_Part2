@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-
+//Global function for creating an error alert
 func initializeErrorAlert() -> UIAlertView{
     var usernameNotFoundAlert: UIAlertView = UIAlertView()
     usernameNotFoundAlert.title = errorTitle
@@ -19,23 +19,20 @@ func initializeErrorAlert() -> UIAlertView{
 }
 
 class CreateTeamViewController: UIViewController {
-
+    
+    //Entry fields for team name field and teammate fields.
     @IBOutlet weak var teamNameField: UITextField!
     @IBOutlet weak var teammate1: UITextField!
     @IBOutlet weak var teammate2: UITextField!
     @IBOutlet weak var teammate3: UITextField!
     @IBOutlet weak var teammate4: UITextField!
     
-    
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     
-    
+    //Puts all the entered usernames into an array for easy access
     func getUsernameArray() -> [String]{
         var array = [String]()
         array.append(teammate1.text)
@@ -44,7 +41,8 @@ class CreateTeamViewController: UIViewController {
         array.append(teammate4.text)
         return array
     }
-
+    
+    //Cancel button dismisses the current view
     @IBAction func cancelBtnClick(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -52,18 +50,23 @@ class CreateTeamViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    //Tries to create team and dismisses the current view if successful
     @IBAction func doneBtnClick(sender: UIButton) {
         if createTeam() {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
+    //Adds an user to a team when given the username
     func addUsertoTeam(username: String, team: Team)-> Bool{
         
+        //Checks if username is an empty string
         if username.isEmpty{
             return true
         }
+        
+        //Queries for the team and player objects that have been inputted
         var userQueryer: PFQuery = PFQuery(className: "Player")
         userQueryer.whereKey("name", equalTo: username)
         var resultArray: Array = userQueryer.findObjects()!
@@ -78,6 +81,7 @@ class CreateTeamViewController: UIViewController {
             println(nameString)
             nameString = objectStringCleaner(nameString)
             
+            //If username works, do it.
             
             if nameString == username{
                 teamObject.addObject(pfobj, forKey: "players")
@@ -91,10 +95,9 @@ class CreateTeamViewController: UIViewController {
         return false
     }
     
+    //Creates a team and attempts to add the users
     func createTeam() -> Bool{
-        
-        
-        
+
         var newTeam: Team = Team(name: teamNameField.text)
         var usernameNotFoundAlert = initializeErrorAlert()
         var usernameSuccess = true

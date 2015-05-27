@@ -10,8 +10,6 @@ func objectStringCleaner(input: String) -> String{
     if count(input) < count(removedString) + 1{
         return input
     }
-    
-    
     let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
     var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
     return result.substringToIndex(result.endIndex.predecessor())
@@ -26,7 +24,6 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a 
         self.view.frame.size.width = SIZE;
         updateUserInfo()
         userTable.reloadData()
@@ -34,11 +31,9 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func labelSize(inputLabel: UILabel){
-        
         let maxSize: CGSize  = CGSizeMake(187, CGFloat.max)
         var size: CGSize = inputLabel.sizeThatFits(maxSize)
         var rect: CGRect = inputLabel.frame
@@ -63,12 +58,8 @@ class AViewController: UIViewController, UITableViewDataSource{
         
     }
     
-    
-    //table stuff here
     @IBOutlet weak var userTable: UITableView!
     
-    //var keyTable:[String] = []
-    //var introDict = Dictionary<String, String>()
     var valueDict = Dictionary<String, String>()
     let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
     let keyList: [String] = ["name", "team", "competition", "score"]
@@ -80,9 +71,6 @@ class AViewController: UIViewController, UITableViewDataSource{
         if (userProfileReference == nil){
             println("nil userProfile")
         } else {
-            //var userID: String = userProfile!.objectId!
-            //var userQuery = PFQuery(className: "Player")
-            //var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
             var userProfile: Player = Player(player: userProfileReference!)
             for key in keyList {
                 if key == "competition"{
@@ -128,17 +116,11 @@ class AViewController: UIViewController, UITableViewDataSource{
         }
         
         if (rowTitle == "team"){
-            
             var leaveTeamButton = createLeaveButton()
             cell.addSubview(leaveTeamButton)
-            
         }
-        
         cell.textLabel?.text = rowTitle
         cell.detailTextLabel?.text = rowContent
-        
-
-        
         return cell
     }
 }

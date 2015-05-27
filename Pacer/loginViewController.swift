@@ -11,25 +11,23 @@ import Foundation
 import Parse
 import Bolts
 
-
+//Constants for error messages used throughout the program
 let errorTitle = "Error"
 let errorButtonString = "Affirmative"
 
+//Log in screen view controller
 class loginViewController : UIViewController {
     
-    
+    //Variables for working with the two entry fields on the login screen
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passworldField: UITextField!
     
-    
+    //Disables editing/keyboard when background is tapped
     @IBAction func backgroundTap(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
-    /*
-    @IBAction func backgroundTap(sender: UITapGestureRecognizer) {
-    }
-    */
     
+    //Checks if there is a user, and dismisses the view if a user is logged in
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
         if (PFUser.currentUser() != nil){
@@ -40,17 +38,17 @@ class loginViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    //Logs in the user
     @IBAction func pressLogin(sender: UIButton) {
         if (usernameField.text.isEmpty || passworldField.text.isEmpty)
         {
+            //Error popup if username and/or password is empty
             var failAlert: UIAlertView = UIAlertView()
             failAlert.title = errorTitle
             failAlert.message = "Please enter in your username and password."
