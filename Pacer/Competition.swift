@@ -42,4 +42,5 @@ class Competition
         self.ObjectID = Object.objectId!
     }
     
+    
 }

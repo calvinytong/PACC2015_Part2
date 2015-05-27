@@ -11,19 +11,33 @@ import CoreMotion
 
 class PedometerHelper
 {
+    // the CMPedometer Object
     let pedometer : CMPedometer
+    
+    // the number of steps the user has taken
     var steps : NSInteger
+    
+    //boolean telling if the pedometer is available on the current phone (iphone 5s and above)
     var available : Bool
+    
+    //the date that the object started collecting data
     var startdate : NSDate
     
+    /**
+     * the init statment sets steps to and date to current date
+     */
     init()
     {
         self.pedometer = CMPedometer()
         self.steps = 0
         self.available = true
+        //returns current date
         self.startdate = NSDate()
     }
     
+    /**
+     * starts the collection of data collection will continue until end collection is called
+     */
     func startCollection()
     {
         self.startdate = NSDate()
@@ -45,6 +59,9 @@ class PedometerHelper
 
     }
     
+    /**
+     * ends the data collection
+     */
     func endCollection()
     {
         pedometer.stopPedometerUpdates()
