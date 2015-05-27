@@ -120,6 +120,8 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
             println("SEARCH IS NOT ACTIVE")
             cell.textLabel?.text = data[indexPath.row]
             //            cell.textLabel?.text = "test"
+            var str = String(stringInterpolationSegment: mainParseManager.teamarray[indexPath.row].Object["score"])
+            cell.detailTextLabel?.text = str.substringWithRange(Range<String.Index>(start: advance(str.startIndex, 9), end: advance(str.endIndex, -1)))
             return cell
         }
         else
@@ -128,9 +130,11 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
             println("SEARCH IS ACTIVE")
             if(indexPath.row < filtered.count)
             {
+                // gotta remove "Optional(" and ")"
                 cell.textLabel?.text = filtered[indexPath.row]
+                var str = String(stringInterpolationSegment: mainParseManager.teamarray[indexPath.row].Object["score"])
+                cell.detailTextLabel?.text = str.substringWithRange(Range<String.Index>(start: advance(str.startIndex, 9), end: advance(str.endIndex, -1)))
             }
-
         }
         
         return cell;

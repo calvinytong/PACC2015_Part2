@@ -153,7 +153,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             let rowTitle = keyList[indexPath.row]
             var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
-            if rowContent.isEmpty{
+            if rowContent.isEmpty
+            {
                 rowContent = defaultDict[rowTitle]!
                 cell.backgroundColor = UIColor.redColor()
             }
