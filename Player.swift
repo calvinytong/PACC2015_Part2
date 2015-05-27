@@ -73,18 +73,18 @@ class Player
         }
     }
     
-    func joinTeam(teamID : String)
+    func joinTeam(t : Team)
     {
-        self.Object["team"] = teamID
-        addPlayerToTeam(teamID)
+        self.Object["team"] = t.ObjectID
+        addPlayerToTeam(t)
         pushObject()
         pedometerHelper.startCollection()
     }
     
-    func addPlayerToTeam(id : String)
+    private func addPlayerToTeam(t: Team)
     {
-        var query = PFQuery(className:"Team")
-        query.getObjectInBackgroundWithId(id) {
+        var query = PFQuery(className: "Team")
+        query.getObjectInBackgroundWithId(t.ObjectID) {
             (teamObject: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 println(error)
@@ -97,6 +97,7 @@ class Player
                 println("failed for other reasons")
             }
         }
+        t.players.append(self.Object)
     }
     
 }
