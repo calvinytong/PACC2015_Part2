@@ -11,11 +11,22 @@ import Parse
 
 class Team
 {
+    //the PFObjectarray holding the players
     var players : [PFObject]
+    
+    //the objectID of the object on the cloud
     var ObjectID : String
+    
+    //the PFobject in the cloud
     var Object : PFObject
+    
+    //the query for the parse cloud class team
     var query = PFQuery(className: "Team")
     
+    /**
+    * the init using name (mostly for testing)
+    * @param name the name of the player object
+    */
     init(name : String)
     {
         players = [PFObject]()
@@ -29,6 +40,10 @@ class Team
         println(self.ObjectID)
     }
     
+    /**
+    * init using a PFobject. Sets everything up
+    * @param team the PFobject to be turned into a local team object
+    */
     init(team : PFObject)
     {
         self.players = [PFObject]()
@@ -47,7 +62,9 @@ class Team
     }
     
     
-    
+    /**
+    * pushes the score to the cloud
+    */
     func pushScore()
     {
         self.Object["score"] = calcScore()
@@ -55,6 +72,9 @@ class Team
         
     }
     
+    /**
+    * pushes the current local object to the cloud
+    */
     func pushObject()
     {
         query.getObjectInBackgroundWithId(ObjectID) {
@@ -71,7 +91,11 @@ class Team
         
     }
     
-    func calcScore() -> Int
+    /**
+    * calculates the total score of the team
+    * @return tempscore the score of the team
+    */
+    private func calcScore() -> Int
     {
         var tempscore : Int = 0
         for p in players

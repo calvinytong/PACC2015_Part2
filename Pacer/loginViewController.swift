@@ -67,6 +67,10 @@ class loginViewController : UIViewController {
         self.performSegueWithIdentifier("toSignUp", sender: self)
     }
     
+    /**
+     * the login function using parse
+     * @return loggedIn the boolean saying if signin failed or not
+     */
     func login() -> Bool{
         var loggedIn : Bool = true
         PFUser.logInWithUsernameInBackground(usernameField.text, password: passworldField.text) {
