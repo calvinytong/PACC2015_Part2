@@ -103,6 +103,8 @@ class AViewController: UIViewController, UITableViewDataSource{
         var userProfile: Player = Player(player: (PFUser.currentUser()!["profile"] as? PFObject)!)
         userProfile.Object["team"] = ""
         userProfile.pushObject()
+        updateUserInfo()
+        userTable.reloadData()
     }
     
     func createLeaveButton() -> UIButton{

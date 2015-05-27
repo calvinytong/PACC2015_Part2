@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="Pacer" customModuleProvider="target">
             <connections>
+                <outlet property="detailButton" destination="qtE-DP-Nfd" id="RLd-it-s36"/>
+                <outlet property="joinButton" destination="vuH-gx-gBn" id="R90-m8-M2i"/>
                 <outlet property="searchBar" destination="sB7-PN-mkJ" id="7ak-K6-uj4"/>
                 <outlet property="tableView" destination="CEZ-CT-0Pb" id="0CB-Bb-VI0"/>
                 <outlet property="totalView" destination="i5M-Pr-FkT" id="dgY-8O-jDi"/>
@@ -38,6 +40,24 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableViewCellContentView>
                 </tableViewCell>
+                <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vuH-gx-gBn">
+                    <rect key="frame" x="0.0" y="623" width="182" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.43647164189999998" blue="0.52231560470000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Join">
+                        <color key="titleColor" red="0.98633870830000003" green="1" blue="0.44691391130000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qtE-DP-Nfd">
+                    <rect key="frame" x="182" y="625" width="193" height="42"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.17076367610000001" green="0.58068173509999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Details">
+                        <color key="titleColor" red="0.73995646179999996" green="1" blue="0.93749951890000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="0.38910461061099111" blue="0.6474267140486698" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

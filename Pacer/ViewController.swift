@@ -10,16 +10,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var Cell: UITableViewCell!
     @IBOutlet var totalView: UIView!
+    @IBOutlet weak var joinButton: UIButton!
+    @IBOutlet weak var detailButton: UIButton!
     
     var searchActive : Bool = false
     var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
     var filtered:[String] = []
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
+    var mainParseManager:ParseManager = ParseManager()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateUserInfo()
+        mainParseManager.pullTeams({(success: Bool!, error : NSError!) -> Void in
+            if success == true
+            {
+                self.data = self.mainParseManager.teamNames
+                NSLog("This is how many teams we found: \(self.data.count)")
+            }
+        })
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -83,10 +94,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 1
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-
     //var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
     var valueDict = Dictionary<String, String>()
@@ -156,6 +163,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         else if(searchActive)
         {
+            println(filtered.count)
             if(indexPath.row < filtered.count)
             {
                 cell.textLabel?.text = filtered[indexPath.row]
@@ -173,12 +181,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell;
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        NSLog("You DE-selected cell number: \(indexPath.row)!")
+        self.joinButton.hidden = true;
+        self.detailButton.hidden = true;
+    }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         NSLog("You selected cell number: \(indexPath.row)!")
 //        self.performSegueWithIdentifier("yourIdentifier", sender: self)
         var parentVC = parentViewController!
-        parentVC.performSegueWithIdentifier("goToCreateTeam", sender: self)
+        var cell = tableView.cellForRowAtIndexPath(indexPath)
+        if cell?.textLabel?.text == "Create New Team!" {
+            parentVC.performSegueWithIdentifier("goToCreateTeam", sender: self)
+        } else {
+            self.joinButton.hidden = false;
+            self.detailButton.hidden = false;
+        }
+        
     }
 }
 
