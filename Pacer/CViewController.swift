@@ -21,12 +21,17 @@ class CViewController: UIViewController, UISearchBarDelegate {
     
     
     var filtered:[Team]!
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        data = mainParseManager.pullTeams()
-        
+        mainParseManager.pullTeams({(success: Bool!, error : NSError!) -> Void in
+            if success == true{
+                self.data = self.mainParseManager.teamarray
+                println(self.data.count)
+            }
+            
+        })
         searchBar.delegate = self
-        
         search()
     }
     

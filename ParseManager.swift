@@ -12,6 +12,9 @@ import Bolts
 
 class ParseManager
 {
+    var temparray : [PFObject] = [PFObject]()
+    var teamarray : [Team] = [Team]()
+
     //swift has weird stuff. Can't just do a static class
     init()
     {
@@ -37,28 +40,34 @@ class ParseManager
         return tempobj
     }
     
-    func pullAllObjects(type : String) -> [PFObject]
+    func pullAllObjects(type : String, completionHandler: (Bool!, NSError!) -> Void)
     {
-        var temparray : [PFObject] = [PFObject]()
+        
         var query = PFQuery(className: type)
         //gets first 100 objects
+        query.orderByAscending("score")
          query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
             
             if error == nil {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count) scores.")
+                println("Successfully retrieved \(objects!.count) Teams.")
                 // Do something with the found objects
-                if let objects = objects as? [PFObject] {
-                    temparray = objects
+                //println(objects)
+
+                if let objectarray : [PFObject] = objects as? [PFObject] {
+                    //println(objectarray)
+                    self.temparray = objectarray
+                    //println(temparray)
+                    completionHandler(true, nil)
                 }
             } else {
                 // Log details of the failure
                 println("Error: \(error!) \(error!.userInfo!)")
-                return
+                completionHandler(false, nil)
             }
         }
-        return temparray
+        //println("I EXITED")
     }
     
     func pullPlayer(id : String) -> Player
@@ -76,14 +85,23 @@ class ParseManager
         return Competition(Competition: pullObject(id, type: "Competition"))
     }
     
-    func pullTeams() -> [Team]
+    func pullTeams(completionHandler: (Bool!, NSError!) -> Void)
     {
-        var teamarray : [Team] = [Team]()
-        var temparray : [PFObject] = pullAllObjects("Team")
-        for o in temparray
-        {
-            teamarray.append(Team(team: o))
-        }
-        return teamarray
+        self.teamarray = []
+        var completed = false
+        pullAllObjects("Team", completionHandler: {
+            (success: Bool!, error: NSError!) -> Void in
+            if success == true
+            {
+                for o in self.temparray
+                {
+                    self.teamarray.append(Team(team: o))
+                }
+                completionHandler(true, nil)
+            }
+        })
+        
     }
+    
+    
 }
