@@ -22,14 +22,12 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         
         mainParseManager.pullTeams({(success: Bool!, error : NSError!) -> Void in
-            if success == true{
+            if success == true
+            {
                 self.data = self.mainParseManager.teamNames
-                println(self.data.count)
+                NSLog("This is how many teams we found: \(self.data.count)")
             }
-            
         })
-        
-        updateUserInfo()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -42,8 +40,7 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         searchBar.delegate = self
         
-        
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -72,14 +69,11 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        /*
         if(filtered.count == 0){
-        searchActive = false;
+            searchActive = false;
         } else {
-        searchActive = true;
+            searchActive = true;
         }
-        */
-        searchActive = true;
         self.tableView.reloadData()
     }
     
@@ -93,90 +87,35 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        NSLog("You DE-selected cell number: \(indexPath.row)!")
+        self.challengeBtn.hidden = true;
+        self.detailsBtn.hidden = true;
     }
     
-    //var keyTable:[String] = []
-    //var introDict = Dictionary<String, String>()
-    var valueDict = Dictionary<String, String>()
-    let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
-    let keyList: [String] = ["name", "team", "competition", "score"]
-    
-    let removedString = "Optional("
-    
-    func objectStringCleaner(input: String) -> String{
-        
-        if count(input) < count(removedString) + 1{
-            return input
-        }
-        
-        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
-        var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
-        return result.substringToIndex(result.endIndex.predecessor())
-    }
-    
-    func updateUserInfo(){
-        var userProfileReference = PFUser.currentUser()!["profile"] as? PFObject
-        
-        if (userProfileReference == nil){
-            println("nil userProfile")
-        } else {
-            //var userID: String = userProfile!.objectId!
-            //var userQuery = PFQuery(className: "Player")
-            //var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
-            var userProfile: Player = Player(player: userProfileReference!)
-            for key in keyList {
-                if key == "competition"{
-                    valueDict.updateValue("", forKey: key)
-                    continue
-                }
-                
-                valueDict.updateValue("\(userProfile.Object.objectForKey(key))", forKey: key)
-            }
-        }
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(!searchActive)
+        if(searchActive)
         {
-            return keyList.count
-        }
-        else if(searchActive)
-        {
-            return filtered.count + 1 // Create Team as well
+            return filtered.count
         }
         return data.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
-        
-        if(!searchActive) // checks if team exists
+        if(searchActive)
         {
-            let rowTitle = keyList[indexPath.row]
-            var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
-            if rowContent.isEmpty{
-                rowContent = defaultDict[rowTitle]!
-                cell.backgroundColor = UIColor.redColor()
-            }
-            cell.textLabel?.text = rowTitle
-            cell.detailTextLabel?.text = rowContent
-            return cell;
-        }
-        else if(searchActive)
-        {
+            println("SEARCH IS ACTIVE")
             if(indexPath.row < filtered.count)
             {
                 cell.textLabel?.text = filtered[indexPath.row]
             }
-            else if(indexPath.row == (filtered.count))
-            {
-                cell.textLabel?.text = "Create New Team!" // works
-            }
         }
         else
         {
+            println("SEARCH IS NOT ACTIVE")
             cell.textLabel?.text = data[indexPath.row]
+//            cell.textLabel?.text = "test"
         }
         
         return cell;
@@ -185,7 +124,8 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         NSLog("You selected cell number: \(indexPath.row)!")
-        //        self.performSegueWithIdentifier("yourIdentifier", sender: self)
+        self.challengeBtn.hidden = false;
+        self.detailsBtn.hidden = false;
     }
 }
 
