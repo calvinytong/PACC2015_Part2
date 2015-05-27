@@ -26,6 +26,7 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
             {
                 self.data = self.mainParseManager.teamNames
                 NSLog("This is how many teams we found: \(self.data.count)")
+                self.tableView.reloadData()
             }
         })
         
@@ -45,18 +46,22 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true;
+        self.tableView.reloadData()
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchActive = false;
+        self.tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
+        self.tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
+        self.tableView.reloadData()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -69,9 +74,12 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        if(filtered.count == 0){
+        if(filtered.count == 0)
+        {
             searchActive = false;
-        } else {
+        }
+        else
+        {
             searchActive = true;
         }
         self.tableView.reloadData()
@@ -94,28 +102,35 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(searchActive)
+
+        if(!searchActive)
         {
-            return filtered.count
+            return data.count
         }
-        return data.count;
+        else
+        {
+            return filtered.count;
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
-        if(searchActive)
+        if(!searchActive)
         {
+            println("SEARCH IS NOT ACTIVE")
+            cell.textLabel?.text = data[indexPath.row]
+            //            cell.textLabel?.text = "test"
+            return cell
+        }
+        else
+        {
+            
             println("SEARCH IS ACTIVE")
             if(indexPath.row < filtered.count)
             {
                 cell.textLabel?.text = filtered[indexPath.row]
             }
-        }
-        else
-        {
-            println("SEARCH IS NOT ACTIVE")
-            cell.textLabel?.text = data[indexPath.row]
-//            cell.textLabel?.text = "test"
+
         }
         
         return cell;
