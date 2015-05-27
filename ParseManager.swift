@@ -110,9 +110,9 @@ class ParseManager
         
         var query = PFQuery(className: type)
         //gets first 100 objects
-        if(type == "team")
+        if(type == "Team")
         {
-            query.orderByAscending("score")
+            query.orderByDescending("score")
         }
          query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
