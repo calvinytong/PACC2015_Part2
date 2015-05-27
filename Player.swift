@@ -11,12 +11,22 @@ import Parse
 
 class Player
 {
+    //the objectID of the PFObject on the cloud
     var ObjectID : String
-    var Object : PFObject
-    var pedometerHelper : PedometerHelper
-    var query = PFQuery(className:"Player")
-    let queryList: [String] = ["name", "team", "score"]
     
+    //the PFobject
+    var Object : PFObject
+    
+    //the pedometer helper that deals with the pedometer module
+    var pedometerHelper : PedometerHelper
+    
+    //the query for the parse class
+    var query = PFQuery(className:"Player")
+    
+    /**
+     *  init statement with name (mostly for testing). Sets up pedometer helper and saves object to the cloud.
+     * @param name the name of the player to be implemented
+     */
     init(name : String)
     {
         self.pedometerHelper = PedometerHelper()
@@ -37,9 +47,13 @@ class Player
                 print("we lost boyz")
             }
         }
-        pushObject()
+        //pushObject()
     }
     
+    /**
+     * init statement with a PFObject
+     * @param player the PFobject to be turned into a player
+     */
     init(player : PFObject)
     {
         self.pedometerHelper = PedometerHelper()
@@ -51,13 +65,18 @@ class Player
     
     
     
-    
+    /**
+      * updates the score field of the PFobject on the cloud
+     */
     func updateScore()
     {
         self.Object["score"] = self.pedometerHelper.steps
         pushObject()
     }
     
+    /**
+     * pushes the current player object stored locally to the cloud
+     */
     func pushObject()
     {
         query.getObjectInBackgroundWithId(ObjectID) {
@@ -73,14 +92,23 @@ class Player
         }
     }
     
+    /**
+     * joins the player to team t
+     * @param t the team object to join
+     */
     func joinTeam(t : Team)
     {
         self.Object["team"] = t.ObjectID
         addPlayerToTeam(t)
         pushObject()
+        //start collecting when a team is joined
         pedometerHelper.startCollection()
     }
     
+    /**
+    * private helper method that adds a player to team t
+    * @param t the team object to join
+    */
     private func addPlayerToTeam(t: Team)
     {
         var query = PFQuery(className: "Team")
