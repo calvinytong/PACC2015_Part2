@@ -15,12 +15,11 @@ class ParseManager
     //these are global variables because of the block execution sync problem where code executes before the array is populated. These eliminates returns
     var temparray : [PFObject] = [PFObject]()
     var teamarray : [Team] = [Team]()
+    var teamNames:[String] = []
 
     //swift has weird stuff. Can't just do a static class (wtf apple)
     init()
-    {
-        
-    }
+    {}
     
     /**
      * pulls a player object from the cloud
@@ -59,6 +58,7 @@ class ParseManager
     func pullTeams(completionHandler: (Bool!, NSError!) -> Void)
     {
         self.teamarray = []
+        self.teamNames = []
         var completed = false
         pullAllObjects("Team", completionHandler: {
             (success: Bool!, error: NSError!) -> Void in
@@ -67,6 +67,7 @@ class ParseManager
                 for o in self.temparray
                 {
                     self.teamarray.append(Team(team: o))
+                    self.teamNames.append(o["name"] as! String)
                 }
                 completionHandler(true, nil)
             }

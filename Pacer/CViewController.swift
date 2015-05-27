@@ -16,17 +16,15 @@ class CViewController: UIViewController, UISearchBarDelegate {
     var searchActive : Bool = false
     var mainParseManager: ParseManager = ParseManager()
     
-    var data:[Team]!
-
-    
-    
+    var data:[String]!
     var filtered:[Team]!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         mainParseManager.pullTeams({(success: Bool!, error : NSError!) -> Void in
             if success == true{
-                self.data = self.mainParseManager.teamarray
+                self.data = self.mainParseManager.teamNames
                 println(self.data.count)
             }
             
@@ -47,7 +45,7 @@ class CViewController: UIViewController, UISearchBarDelegate {
             query.whereKey("name", containsString: searchText)
         }
         query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
-            self.data = (results as? [Team])!
+//            self.data = (results as? [String])!
             self.tableView.reloadData()
         }
         
@@ -65,7 +63,7 @@ class CViewController: UIViewController, UISearchBarDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         let obj = self.data[indexPath.row]
-        cell.textLabel!.text = data[indexPath.row].Object["name"] as? String
+        cell.textLabel!.text = data[indexPath.row]
         return cell
     }
     

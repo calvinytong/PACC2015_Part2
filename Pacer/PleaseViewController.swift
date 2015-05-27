@@ -3,21 +3,31 @@ import UIKit
 import Parse
 
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
-    
+class PleaseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
+
     @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var Cell: UITableViewCell!
-    @IBOutlet var totalView: UIView!
+    @IBOutlet weak var challengeBtn: UIButton!
+    @IBOutlet weak var detailsBtn: UIButton!
     
-    var searchActive : Bool = false
-    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+    var mainParseManager:ParseManager = ParseManager()
+    var searchActive: Bool = false
+    var data: [String] = []
     var filtered:[String] = []
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainParseManager.pullTeams({(success: Bool!, error : NSError!) -> Void in
+            if success == true{
+                self.data = self.mainParseManager.teamNames
+                println(self.data.count)
+            }
+            
+        })
         
         updateUserInfo()
         
@@ -32,7 +42,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         searchBar.delegate = self
         
-
         
         tableView.reloadData()
     }
@@ -65,9 +74,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         /*
         if(filtered.count == 0){
-            searchActive = false;
+        searchActive = false;
         } else {
-            searchActive = true;
+        searchActive = true;
         }
         */
         searchActive = true;
@@ -86,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-
+    
     //var keyTable:[String] = []
     //var introDict = Dictionary<String, String>()
     var valueDict = Dictionary<String, String>()
@@ -126,7 +135,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searchActive)
         {
@@ -169,16 +178,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             cell.textLabel?.text = data[indexPath.row]
         }
-    
+        
         return cell;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         NSLog("You selected cell number: \(indexPath.row)!")
-//        self.performSegueWithIdentifier("yourIdentifier", sender: self)
-        var parentVC = parentViewController!
-        parentVC.performSegueWithIdentifier("goToCreateTeam", sender: self)
+        //        self.performSegueWithIdentifier("yourIdentifier", sender: self)
     }
 }
 

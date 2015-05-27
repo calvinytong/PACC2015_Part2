@@ -36,20 +36,24 @@ class ContainerViewController: UIViewController {
         var ProfileVc :ViewController =  ViewController(nibName: "ViewController", bundle: nil);
         var CVc :CViewController =  CViewController(nibName: "CViewController", bundle: nil);
         var LeaderboardVc: LeaderboardTableViewController = LeaderboardTableViewController(nibName: "LeaderboardTableViewController", bundle: nil);
-
+        var PleaseVc: PleaseViewController = PleaseViewController(nibName: "PleaseViewController", bundle: nil);
         
         // 2) Add in each view to the container view hierarchy
         //    Add them in opposite order since the view hieracrhy is a stack
-
+/*
         self.addChildViewController(CVc);
         self.scrollView!.addSubview(CVc.view);
         CVc.didMoveToParentViewController(self);
 
-        /*
+        
         self.addChildViewController(LeaderboardVc);
         self.scrollView!.addSubview(LeaderboardVc.view);
         LeaderboardVc.didMoveToParentViewController(self);
         */
+  
+        self.addChildViewController(PleaseVc);
+        self.scrollView!.addSubview(PleaseVc.view);
+        PleaseVc.didMoveToParentViewController(self);
         
         self.addChildViewController(ProfileVc);
         self.scrollView!.addSubview(ProfileVc.view);
@@ -59,6 +63,7 @@ class ContainerViewController: UIViewController {
         self.scrollView!.addSubview(AVc.view);
         AVc.didMoveToParentViewController(self);
 
+        pages = CGFloat(childViewControllers.count)
         
         // 3) Set up the frames of the view controllers to align
         //    with eachother inside the container view
@@ -73,9 +78,11 @@ class ContainerViewController: UIViewController {
 
         //CVc.view.frame.origin.x = 640;
 //        CVc.view.frame.origin.x = AVc.view.frame.size.width + ProfileVc.view.frame.size.width
-        CVc.view.frame.origin.x = WIDTH * 2;
+        //CVc.view.frame.origin.x = WIDTH * 2;
         
         //LeaderboardVc.view.frame.origin.x = WIDTH * 2;
+        
+        PleaseVc.view.frame.origin.x = WIDTH * 2;
         
         // 4) Finally set the size of the scroll view that contains the frames
         
