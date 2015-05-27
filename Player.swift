@@ -64,13 +64,12 @@ class Player
             (playerObject: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 println(error)
-            } else if let pObject = playerObject {
-                pObject["name"] = self.Object["name"]
-                pObject["team"] = self.Object["team"]
-                pObject["score"] = self.Object["score"]
-                pObject.saveInBackground()
+            } else if let playerObject = playerObject {
+                playerObject["name"] = self.Object["name"]
+                playerObject["team"] = self.Object["team"]
+                playerObject["score"] = self.Object["score"]
             }
-
+            
         }
     }
     
@@ -84,15 +83,19 @@ class Player
     
     func addPlayerToTeam(id : String)
     {
+        var query = PFQuery(className:"Team")
         query.getObjectInBackgroundWithId(id) {
             (teamObject: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 println(error)
-            } else if let tObject = teamObject {
-                tObject.addObject(self.Object, forKey: "players")
-                tObject.saveInBackground()
+            } else if let teamObject = teamObject {
+                teamObject.addObject(self.Object, forKey: "players")
+                teamObject.saveInBackground()
             }
-            
+            else
+            {
+                println("failed for other reasons")
+            }
         }
     }
     

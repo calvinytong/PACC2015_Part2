@@ -24,38 +24,34 @@ class Team
         self.Object["name"] = name
         self.Object["players"] = self.players
         self.Object["score"] = 0
-        self.Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            if (success)
-            {
-                self.Object.objectId! = self.ObjectID
-                println("Object has been saved.")
-            }
-            else
-            {
-                print("team iz bad boyz")
-            }
-        }
+        self.Object.save()
+        self.ObjectID = self.Object.objectId!
+        println(self.ObjectID)
     }
     
     init(team : PFObject)
     {
-        
-        self.Object = team
-        self.ObjectID = self.Object.objectId!
         self.players = [PFObject]()
-        var temparray : NSArray = self.Object["players"] as! NSArray
-        for p in temparray
+        self.ObjectID = ""
+        self.Object = team
+        if let temparray : NSArray = self.Object["players"] as? NSArray
         {
-            self.players.append(p as! PFObject)
+            for p in temparray
+            {
+                self.players.append(p as! PFObject)
+            }
         }
         
+        Object.save()
+        self.ObjectID = Object.objectId!
     }
+    
     
     
     func pushScore()
     {
-       self.Object["score"] = calcScore()
-       pushObject()
+        self.Object["score"] = calcScore()
+        pushObject()
         
     }
     
@@ -69,11 +65,10 @@ class Team
                 playerObject["name"] = self.Object["name"]
                 playerObject["players"] = self.Object["players"]
                 playerObject["score"] = self.Object["score"]
-                playerObject.saveInBackground()
             }
             
         }
-
+        
     }
     
     func calcScore() -> Int
