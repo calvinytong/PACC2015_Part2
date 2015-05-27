@@ -226,11 +226,58 @@
                         <outlet property="scrollView" destination="ng6-jt-Dw5" id="Ibv-o9-en6"/>
                         <segue destination="emb-lH-EYp" kind="modal" identifier="goToLogin" id="uQW-gx-Yju"/>
                         <segue destination="LpT-S6-2IK" kind="modal" identifier="goToCreateTeam" id="gEX-Jp-Q6L"/>
+                        <segue destination="U7T-K8-mj3" kind="modal" identifier="goToChallenge" id="7bG-el-qN0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWo-L0-ff3" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="945" y="-285"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Wxd-ZH-Z8N">
+            <objects>
+                <viewController id="U7T-K8-mj3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bM1-40-liz"/>
+                        <viewControllerLayoutGuide type="bottom" id="jKN-CB-rLX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5w2-s8-n8f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a Challenge!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipX-1F-8oh">
+                                <rect key="frame" x="78" y="28" width="165" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uqL-Uz-Aau">
+                                <rect key="frame" x="16" y="57" width="288" height="469"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ivh-NA-aXT">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Sb5-Az-OEn">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BK2-AU-b3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1401" y="-191"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YFP-y8-jUE">
