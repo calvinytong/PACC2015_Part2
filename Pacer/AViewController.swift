@@ -78,14 +78,17 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     //Updates the arrays/dict that acts as data source for the table view
     func updateUserInfo(){
-        if let userProfileReference = PFUser.currentUser()!["profile"] as? PFObject{
-            var userProfile: Player = Player(player: userProfileReference)
+        if let userProfileReference = PFUser.currentUser(){
+            var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
             for key in keyList {
                 if key == "competition"{
                     valueDict.updateValue("", forKey: key)
                     continue
+                } else if let value = userProfile.Object[key]{
+                    valueDict.updateValue("\(value)", forKey: key)
+                } else {
+                    valueDict.updateValue("", forKey: key)
                 }
-                valueDict.updateValue("\(userProfile.Object.objectForKey(key))", forKey: key)
             }
         }
     }
@@ -97,8 +100,8 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     //Leave team function that triggers when leave team button is pres
     func leaveTeam(sender: UIButton){
-        if let currentUser = PFUser.currentUser()!["profile"] as? PFObject{
-            var userProfile: Player = Player(player: currentUser)
+        if let currentUser = PFUser.currentUser(){
+            var userProfile: Player = Player(player: (currentUser["profile"] as? PFObject)!)
             userProfile.leaveTeam()
             updateUserInfo()
             userTable.reloadData()
@@ -121,12 +124,14 @@ class AViewController: UIViewController, UITableViewDataSource{
         var cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
         
         let rowTitle = keyList[indexPath.row]
+        if valueDict[rowTitle] == nil{
+            return cell
+        }
         var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
         if rowContent.isEmpty{
             rowContent = defaultDict[rowTitle]!
             cell.backgroundColor = UIColor.redColor()
         }
-        
         if (rowTitle == "team" && PFUser.currentUser()!["profile"] as? PFObject != nil){
             var leaveTeamButton = createLeaveButton()
             cell.addSubview(leaveTeamButton)

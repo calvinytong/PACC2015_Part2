@@ -35,7 +35,7 @@ class Player
         self.ObjectID = ""
         self.Object = PFObject(className: "Player")
         Object["name"] = name
-        Object["team"] = ""
+        //Object["team"] = PFObject(className: "Team")
         Object["score"] = 0
         
         Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
@@ -161,7 +161,7 @@ class Player
             }
             
         }
-        self.Object["team"] = ""
+        self.Object["team"] = NSNull()
         self.pushObject()
         
     }

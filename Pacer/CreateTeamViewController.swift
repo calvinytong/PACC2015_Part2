@@ -74,23 +74,16 @@ class CreateTeamViewController: UIViewController {
         var teamQueryer: PFQuery = PFQuery(className: "Team")
         var teamObject: PFObject = teamQueryer.getObjectWithId(team.Object.objectId!)!
         
-        println(resultArray)
         for obj in resultArray{
             var pfobj: PFObject = obj as! PFObject
             var nameString: String = obj["name"] as! String
-            println(nameString)
             nameString = objectStringCleaner(nameString)
             
-            //If username works, do it.
+            var joiningPlayer: Player = Player(player: pfobj)
+            var joinedTeam: Team = Team(team: teamObject)
+            joiningPlayer.joinTeam(joinedTeam)
             
-            if nameString == username{
-                teamObject.addObject(pfobj, forKey: "players")
-                teamObject.saveInBackground()
-                pfobj["team"] = teamObject.objectId
-                pfobj.saveInBackground()
-                
-                return true
-            }
+            return true
         }
         return false
     }

@@ -58,6 +58,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.reloadData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        mainParseManager.pullTeams({(success: Bool!, error : NSError!) -> Void in
+            if success == true
+            {
+                self.data = self.mainParseManager.teamNames
+                NSLog("This is how many teams we found: \(self.data.count)")
+            }
+        })
+    
+    }
+    
     
     //Functions that change the search active status based on whether the search bar is active or not
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -120,15 +132,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Updates user information in the array for table to display
     func updateUserInfo(){
-        var userProfileReference = PFUser.currentUser()!["profile"] as? PFObject
         
-        if (userProfileReference == nil){
-            println("nil userProfile")
-        } else {
+        if let userProfileReference = PFUser.currentUser(){
             //var userID: String = userProfile!.objectId!
             //var userQuery = PFQuery(className: "Player")
             //var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
-            var userProfile: Player = Player(player: userProfileReference!)
+            var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
             for key in keyList {
                 if key == "competition"{
                     valueDict.updateValue("", forKey: key)
@@ -157,9 +166,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         
+        
         if(!searchActive) // checks if team exists
         {
             let rowTitle = keyList[indexPath.row]
+            if (valueDict[rowTitle] == nil){
+                return cell
+            }
             var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
             if rowContent.isEmpty
             {
