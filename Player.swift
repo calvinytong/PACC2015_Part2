@@ -98,7 +98,7 @@ class Player
      */
     func joinTeam(t : Team)
     {
-        self.Object["team"] = t.ObjectID
+        self.Object["team"] = t.Object["name"]
         addPlayerToTeam(t)
         pushObject()
         //start collecting when a team is joined
