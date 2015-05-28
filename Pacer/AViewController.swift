@@ -102,8 +102,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     //Leave team function that triggers when leave team button is pres
     func leaveTeam(sender: UIButton){
         var userProfile: Player = Player(player: (PFUser.currentUser()!["profile"] as? PFObject)!)
-        userProfile.Object["team"] = ""
-        userProfile.pushObject()
+        userProfile.leaveTeam()
         updateUserInfo()
         userTable.reloadData()
     }
