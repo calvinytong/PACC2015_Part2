@@ -100,7 +100,7 @@ class Player
      */
     func joinTeam(t : Team) -> Bool
     {
-        self.Object["team"] = t.Object["name"]
+        self.Object["team"] = t.Object
         if addPlayerToTeam(t)
         {
              pushObject()
