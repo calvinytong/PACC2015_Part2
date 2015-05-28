@@ -69,7 +69,6 @@ class Team
     {
         self.Object["score"] = calcScore()
         pushObject()
-        
     }
     
     /**
@@ -86,9 +85,7 @@ class Team
                 playerObject["players"] = self.Object["players"]
                 playerObject["score"] = self.Object["score"]
             }
-            
         }
-        
     }
     
     /**
@@ -103,6 +100,5 @@ class Team
             tempscore = tempscore + (p["score"] as! Int)
         }
         return tempscore
-    }
-    
+    }    
 }
