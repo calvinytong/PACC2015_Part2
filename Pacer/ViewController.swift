@@ -5,6 +5,7 @@ import Parse
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     
+    //Access to the search bar, table, table cell, entire view, and buttons
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -13,13 +14,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var detailButton: UIButton!
     
+    //True when the search bar is active, false when not.
     var searchActive : Bool = false
-    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+    
+    //Array of data used to populate table
+    var data = ["Seattle", "New York"]
+    
+    //Array of data filtered out to populate table given a search term
     var filtered:[String] = []
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
+    
+    //Used to call helper methods
     var mainParseManager:ParseManager = ParseManager()
 
-    
+    //Sets the data to list of all team names in the database
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +39,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 NSLog("This is how many teams we found: \(self.data.count)")
             }
         })
+        
+        
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
@@ -48,6 +58,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.reloadData()
     }
     
+    
+    //Functions that change the search active status based on whether the search bar is active or not
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true;
     }
@@ -64,6 +76,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchActive = false;
     }
     
+    //Triggles a change in the table whenever the search bar input changes
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if(tableView.hidden == true)
         {
@@ -74,13 +87,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        /*
-        if(filtered.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
-        }
-        */
         searchActive = true;
         self.tableView.reloadData()
     }
@@ -94,8 +100,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 1
     }
     
-    //var keyTable:[String] = []
-    //var introDict = Dictionary<String, String>()
+    //Constants similar to AViewController for fetching data and putting it in an array for table to display
     var valueDict = Dictionary<String, String>()
     let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
     let keyList: [String] = ["name", "team", "competition", "score"]
@@ -113,6 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return result.substringToIndex(result.endIndex.predecessor())
     }
     
+    //Updates user information in the array for table to display
     func updateUserInfo(){
         var userProfileReference = PFUser.currentUser()!["profile"] as? PFObject
         
@@ -133,7 +139,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
+    
+    //When search is active, displays the search results, otherwise it displays the default user information
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searchActive)
         {
@@ -146,6 +153,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return data.count;
     }
     
+    //Sets the table cells to the search results
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         
@@ -181,11 +189,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell;
     }
     
+    //If a row is deselected, then it hides the challenge/detail buttons
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("You DE-selected cell number: \(indexPath.row)!")
         self.joinButton.hidden = true;
         self.detailButton.hidden = true;
     }
+    
+    //If a row is selected, then it shows the challenge/ detail buttons, and if it's the create team row, then it brings up the create team view
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         NSLog("You selected cell number: \(indexPath.row)!")

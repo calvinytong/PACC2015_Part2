@@ -102,13 +102,15 @@ class CreateTeamViewController: UIViewController {
         var usernameNotFoundAlert = initializeErrorAlert()
         var usernameSuccess = true
         
-        
+        //If the user is valid, nothing gets added to the message, else for each user that fails, it adds the name of the failed user to the error message.
         for user in getUsernameArray() {
             if !addUsertoTeam(user, team: newTeam) {
                 usernameSuccess = false
                 usernameNotFoundAlert.message = usernameNotFoundAlert.message! + user + ","
             }
         }
+        
+        //If not all the usernames work, an error alert shows.
         if (!usernameSuccess){
             usernameNotFoundAlert.message = usernameNotFoundAlert.message!.substringToIndex(usernameNotFoundAlert.message!.endIndex.predecessor())
             usernameNotFoundAlert.show()
