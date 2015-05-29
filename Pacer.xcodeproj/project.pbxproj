@@ -45,6 +45,7 @@
 		7C7F37521B101974000D67FF /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7F37511B101974000D67FF /* CreateTeamViewController.swift */; };
 		7C7F37551B11A735000D67FF /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7F37531B11A735000D67FF /* LeaderboardTableViewController.swift */; };
 		7C7F37561B11A735000D67FF /* LeaderboardTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F37541B11A735000D67FF /* LeaderboardTableViewController.xib */; };
+		7C950D4E1B192A03003FEF36 /* TeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C950D4D1B192A03003FEF36 /* TeamDetailsViewController.swift */; };
 		7CF9E0B21B15940900953CA3 /* PleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9E0B01B15940900953CA3 /* PleaseViewController.swift */; };
 		7CF9E0B31B15940900953CA3 /* PleaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF9E0B11B15940900953CA3 /* PleaseViewController.xib */; };
 		7CF9E0B51B15A1E400953CA3 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9E0B41B15A1E400953CA3 /* ChallengeViewController.swift */; };
@@ -103,6 +104,7 @@
 		7C7F37511B101974000D67FF /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		7C7F37531B11A735000D67FF /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		7C7F37541B11A735000D67FF /* LeaderboardTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewController.xib; sourceTree = "<group>"; };
+		7C950D4D1B192A03003FEF36 /* TeamDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewController.swift; sourceTree = "<group>"; };
 		7CF9E0B01B15940900953CA3 /* PleaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PleaseViewController.swift; sourceTree = "<group>"; };
 		7CF9E0B11B15940900953CA3 /* PleaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PleaseViewController.xib; sourceTree = "<group>"; };
 		7CF9E0B41B15A1E400953CA3 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				7C7F37511B101974000D67FF /* CreateTeamViewController.swift */,
 				7CF9E0B41B15A1E400953CA3 /* ChallengeViewController.swift */,
 				7C5EFF2A1AF9D8A800A8E425 /* Main.storyboard */,
+				7C950D4D1B192A03003FEF36 /* TeamDetailsViewController.swift */,
 				7C5EFF2D1AF9D8A800A8E425 /* Images.xcassets */,
 				7C5EFF2F1AF9D8A800A8E425 /* LaunchScreen.xib */,
 				7C5EFF241AF9D8A800A8E425 /* Supporting Files */,
@@ -361,6 +364,7 @@
 				7C5EFF501AF9D9A600A8E425 /* CViewController.swift in Sources */,
 				3E48CA631B0938020074961A /* PedometerHelper.swift in Sources */,
 				7C5EFF4C1AF9D9A600A8E425 /* AViewController.swift in Sources */,
+				7C950D4E1B192A03003FEF36 /* TeamDetailsViewController.swift in Sources */,
 				7C5EFF271AF9D8A800A8E425 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

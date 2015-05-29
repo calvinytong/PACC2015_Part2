@@ -78,19 +78,29 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     //Updates the arrays/dict that acts as data source for the table view
     func updateUserInfo(){
-        if let userProfileReference = PFUser.currentUser(){
+        if let userProfileReference = PFUser.currentUser()
+        {
             var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
-            for key in keyList {
-                if key == "competition"{
+            for key in keyList
+            {
+                if key == "competition"
+                {
                     valueDict.updateValue("", forKey: key)
                     continue
-                } else if let value = userProfile.Object[key]{
-                    if (value as! NSObject == NSNull()){
+                }
+                else if let value = userProfile.Object[key]
+                {
+                    if (value as! NSObject == NSNull())
+                    {
                         valueDict.updateValue("", forKey: key)
-                    } else {
+                    }
+                    else
+                    {
                         valueDict.updateValue("\(value)", forKey: key)
                     }
-                } else {
+                }
+                else
+                {
                     valueDict.updateValue("", forKey: key)
                 }
             }

@@ -121,8 +121,6 @@ class Player
         {
             return false
         }
-
-
     }
     
     /**
