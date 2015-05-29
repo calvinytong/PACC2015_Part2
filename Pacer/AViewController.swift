@@ -84,7 +84,7 @@ class AViewController: UIViewController, UITableViewDataSource{
                 if key == "competition"{
                     valueDict.updateValue("", forKey: key)
                     continue
-                } else if let value = userProfile.Object[key]{
+                } else if let value: AnyObject = userProfile.Object[key]{
                     if (value as! NSObject == NSNull()){
                         valueDict.updateValue("", forKey: key)
                     } else {

@@ -64,11 +64,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if success == true
             {
                 self.data = self.mainParseManager.teamNames
+                
                 NSLog("This is how many teams we found: \(self.data.count)")
             }
         })
     
     }
+    
+    
+    
     
     
     //Functions that change the search active status based on whether the search bar is active or not
@@ -114,10 +118,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Constants similar to AViewController for fetching data and putting it in an array for table to display
     var valueDict = Dictionary<String, String>()
+    
     let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
+    
     let keyList: [String] = ["name", "team", "competition", "score"]
     
     let removedString = "Optional("
+    
+    var currentRow: Int = -1
     
     func objectStringCleaner(input: String) -> String{
         
@@ -132,23 +140,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Updates user information in the array for table to display
     func updateUserInfo(){
-        
         if let userProfileReference = PFUser.currentUser(){
-            //var userID: String = userProfile!.objectId!
-            //var userQuery = PFQuery(className: "Player")
-            //var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
             var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
             for key in keyList {
                 if key == "competition"{
                     valueDict.updateValue("", forKey: key)
                     continue
+                } else if let value: AnyObject = userProfile.Object[key]{
+                    if (value as! NSObject == NSNull()){
+                        valueDict.updateValue("", forKey: key)
+                    } else {
+                        valueDict.updateValue("\(value)", forKey: key)
+                    }
+                } else {
+                    valueDict.updateValue("", forKey: key)
                 }
-                
-                valueDict.updateValue("\(userProfile.Object.objectForKey(key))", forKey: key)
             }
         }
     }
-    
+    @IBAction func joinPressed(sender: UIButton) {
+        var teamName: String = filtered[currentRow]
+        var teamQuery: PFQuery = PFQuery(className: "Team")
+        teamQuery.whereKey("name", equalTo: teamName)
+        var teamList: Array = teamQuery.findObjects()!
+        var currentPlayer: Player = Player(player: PFUser.currentUser()!["profile"] as! PFObject)
+        
+        for obj in teamList {
+            var teamObj: Team = Team(team: obj as! PFObject)
+            currentPlayer.joinTeam(teamObj)
+            return
+        }
+    }
     //When search is active, displays the search results, otherwise it displays the default user information
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searchActive)
@@ -179,6 +201,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 rowContent = defaultDict[rowTitle]!
                 cell.backgroundColor = UIColor.redColor()
             }
+            
+            
+            
+
             cell.textLabel?.text = rowTitle
             cell.detailTextLabel?.text = rowContent
             return cell;
@@ -206,6 +232,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //If a row is deselected, then it hides the challenge/detail buttons
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("You DE-selected cell number: \(indexPath.row)!")
+        currentRow = -1
         self.joinButton.hidden = true;
         self.detailButton.hidden = true;
     }
@@ -220,6 +247,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if cell?.textLabel?.text == "Create New Team!" {
             parentVC.performSegueWithIdentifier("goToCreateTeam", sender: self)
         } else {
+            currentRow = indexPath.row
             self.joinButton.hidden = false;
             self.detailButton.hidden = false;
         }
