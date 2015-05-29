@@ -11,10 +11,13 @@ import UIKit
 class TeamDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var challengeBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -24,6 +27,19 @@ class TeamDetailsViewController: UIViewController {
     }
     
 
+    @IBAction func challengeBtnClicked(sender: AnyObject) {
+        // goes to challenge page
+/*
+        var parentVC = parentViewController!
+        parentVC.performSegueWithIdentifier("goToChallengeTeam", sender: self)
+*/
+        self.performSegueWithIdentifier("goToChallengeTeam", sender: self)
+    }
+    
+    @IBAction func cancelBtnClicked(sender: AnyObject) {
+        // goes back
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

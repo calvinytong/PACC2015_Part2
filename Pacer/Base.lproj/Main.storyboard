@@ -241,12 +241,12 @@
                                 <rect key="frame" x="0.0" y="623" width="182" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.43647164189999998" blue="0.52231560470000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Confirm">
+                                <state key="normal" title="Challenge">
                                     <color key="titleColor" red="0.98633870830000003" green="1" blue="0.44691391130000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="confirmBtnClicked:" destination="U7T-K8-mj3" eventType="touchUpInside" id="2pP-R0-2sq"/>
+                                    <action selector="challengeBtnClicked:" destination="qhk-ve-U9p" eventType="touchUpInside" id="dHU-Zf-pif"/>
                                 </connections>
                             </button>
                             <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp7-TX-biC">
@@ -258,7 +258,7 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelBtnClicked:" destination="U7T-K8-mj3" eventType="touchUpInside" id="RhG-rk-jHB"/>
+                                    <action selector="cancelBtnClicked:" destination="qhk-ve-U9p" eventType="touchUpInside" id="SrG-jq-AFe"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -267,12 +267,15 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="cancelBtn" destination="bp7-TX-biC" id="wkw-Lo-6pk"/>
+                        <outlet property="challengeBtn" destination="Bzm-cM-x3G" id="lg3-JN-I8e"/>
                         <outlet property="tableView" destination="kIU-Au-HKb" id="qZG-I7-lAf"/>
+                        <segue destination="U7T-K8-mj3" kind="modal" identifier="goToChallengeTeam" id="j2W-AW-xGK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0MZ-o5-634" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1423.5" y="-750.5"/>
+            <point key="canvasLocation" x="1463.5" y="-990.5"/>
         </scene>
         <!--Challenge View Controller-->
         <scene sceneID="Wxd-ZH-Z8N">
@@ -459,4 +462,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="j2W-AW-xGK"/>
+    </inferredMetricsTieBreakers>
 </document>
