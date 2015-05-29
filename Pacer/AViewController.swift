@@ -118,7 +118,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         
         let rowTitle = keyList[indexPath.row]
         var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)

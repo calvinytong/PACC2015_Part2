@@ -26,21 +26,27 @@
                     <rect key="frame" x="0.0" y="64" width="375" height="605"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <button hidden="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wb8-vc-c2m">
+                <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wb8-vc-c2m">
                     <rect key="frame" x="0.0" y="625" width="182" height="44"/>
                     <color key="backgroundColor" red="1" green="0.43647164194074961" blue="0.52231560465050908" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Challenge">
                         <color key="titleColor" red="0.98633870830953196" green="1" blue="0.44691391134048131" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="challengeBtnClick:" destination="-1" eventType="touchUpInside" id="2eT-Xy-NFw"/>
+                    </connections>
                 </button>
-                <button hidden="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hm3-gI-xvi">
-                    <rect key="frame" x="182" y="625" width="193" height="42"/>
-                    <color key="backgroundColor" red="0.17076367610000001" green="0.58068173509999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hm3-gI-xvi">
+                    <rect key="frame" x="182" y="625" width="193" height="44"/>
+                    <color key="backgroundColor" red="0.14577333610728871" green="0.48892474649936191" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Details">
-                        <color key="titleColor" red="0.73995646176573082" green="1" blue="0.93749951886413962" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.72893511176592141" green="1" blue="0.91462950831881884" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="detailsBtnClick:" destination="-1" eventType="touchUpInside" id="nr7-8t-iHk"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

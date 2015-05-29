@@ -41,6 +41,7 @@
 		7C5EFF4D1AF9D9A600A8E425 /* AViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5EFF471AF9D9A600A8E425 /* AViewController.xib */; };
 		7C5EFF501AF9D9A600A8E425 /* CViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EFF4A1AF9D9A600A8E425 /* CViewController.swift */; };
 		7C5EFF511AF9D9A600A8E425 /* CViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5EFF4B1AF9D9A600A8E425 /* CViewController.xib */; };
+		7C6074D81B16944600500489 /* RunningMan.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6074D71B16944600500489 /* RunningMan.png */; };
 		7C7F37521B101974000D67FF /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7F37511B101974000D67FF /* CreateTeamViewController.swift */; };
 		7C7F37551B11A735000D67FF /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7F37531B11A735000D67FF /* LeaderboardTableViewController.swift */; };
 		7C7F37561B11A735000D67FF /* LeaderboardTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7F37541B11A735000D67FF /* LeaderboardTableViewController.xib */; };
@@ -98,6 +99,7 @@
 		7C5EFF471AF9D9A600A8E425 /* AViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AViewController.xib; sourceTree = "<group>"; };
 		7C5EFF4A1AF9D9A600A8E425 /* CViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CViewController.swift; sourceTree = "<group>"; };
 		7C5EFF4B1AF9D9A600A8E425 /* CViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CViewController.xib; sourceTree = "<group>"; };
+		7C6074D71B16944600500489 /* RunningMan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RunningMan.png; sourceTree = "<group>"; };
 		7C7F37511B101974000D67FF /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		7C7F37531B11A735000D67FF /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		7C7F37541B11A735000D67FF /* LeaderboardTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewController.xib; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		7C5EFF241AF9D8A800A8E425 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C6074D71B16944600500489 /* RunningMan.png */,
 				7C5EFF461AF9D9A600A8E425 /* AViewController.swift */,
 				7C5EFF471AF9D9A600A8E425 /* AViewController.xib */,
 				7C4DE0FC1B08737500514F7E /* ViewController.swift */,
@@ -320,6 +323,7 @@
 				7C4DE0FF1B08737500514F7E /* ViewController.xib in Resources */,
 				7C5EFF511AF9D9A600A8E425 /* CViewController.xib in Resources */,
 				7CF9E0B31B15940900953CA3 /* PleaseViewController.xib in Resources */,
+				7C6074D81B16944600500489 /* RunningMan.png in Resources */,
 				7C5EFF4D1AF9D9A600A8E425 /* AViewController.xib in Resources */,
 				7C5EFF2C1AF9D8A800A8E425 /* Main.storyboard in Resources */,
 				7C5EFF311AF9D8A800A8E425 /* LaunchScreen.xib in Resources */,

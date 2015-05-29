@@ -146,6 +146,16 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
         self.challengeBtn.hidden = false;
         self.detailsBtn.hidden = false;
     }
+    @IBAction func challengeBtnClick(sender: AnyObject) {
+        var parentVC = parentViewController!
+        parentVC.performSegueWithIdentifier("goToChallengeTeam", sender: self)
+    }
+    
+    @IBAction func detailsBtnClick(sender: AnyObject) {
+        var parentVC = parentViewController!
+        parentVC.performSegueWithIdentifier("goToTeamDetails", sender: self)
+    }
+    
 }
 
 
