@@ -1,46 +1,46 @@
+// Calvin Tong & Neil Xu
+// 5/27/2015
 //
-//  signUpViewController.swift
-//  Pacer
-//
-//  Created by Calvin Tong on 5/13/15.
-//  Copyright (c) 2015 Joseph Zhong. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import Parse
 
-
+//View controller for the sign up page that pops up
 class signUpViewController : UIViewController {
-
+    //Outlets that lets me get the text from a bunch of entry fields.
     @IBOutlet weak var createUsername: UITextField!
     @IBOutlet weak var createPassword: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var createEmail: UITextField!
     
+    //When the background is tapped, it disables the keyboard/editing of entry fields
     @IBAction func backTapped(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
+    
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
     }
     
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func donePress(sender: UIButton)
-    {
+    
+    //Creates an user account when the "Done" button is tapped
+    @IBAction func donePress(sender: UIButton){
         createLogin()
     }
     
-    @IBAction func backToLoginPressed(sender: UIButton)
-    {
+    //Dismisses the sign up view to go back to the login view
+    @IBAction func backToLoginPressed(sender: UIButton){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    //Creates a user account from the input text fields.
     func createLogin() {
         var user = PFUser()
         user.username = createUsername.text
@@ -51,6 +51,7 @@ class signUpViewController : UIViewController {
         
         
         user.signUpInBackgroundWithBlock {
+            //Throws error if account creation is unsuccessful
             (succeeded: Bool, error: NSError?) -> Void in
             if let error = error {
                 let errorString = error.userInfo?["error"] as! String?

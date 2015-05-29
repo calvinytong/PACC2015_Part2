@@ -23,6 +23,8 @@ class Player
     //the query for the parse class
     var query = PFQuery(className:"Player")
     
+    var teamquery = PFQuery(className: "Team")
+    
     /**
      *  init statement with name (mostly for testing). Sets up pedometer helper and saves object to the cloud.
      * @param name the name of the player to be implemented
@@ -33,7 +35,8 @@ class Player
         self.ObjectID = ""
         self.Object = PFObject(className: "Player")
         Object["name"] = name
-        Object["team"] = ""
+        Object["team"] = NSNull()
+        Object["competition"] = NSNull()
         Object["score"] = 0
         
         Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
@@ -79,14 +82,22 @@ class Player
      */
     func pushObject()
     {
+        println("SAVING BEGINNING")
         query.getObjectInBackgroundWithId(ObjectID) {
             (playerObject: PFObject?, error: NSError?) -> Void in
+            
+            println("BLOCK INITIATED")
             if error != nil {
+                println("ERROR IN SAVING PLAYER")
+
                 println(error)
+                
             } else if let playerObject = playerObject {
+                println("trying to set equal")
                 playerObject["name"] = self.Object["name"]
                 playerObject["team"] = self.Object["team"]
                 playerObject["score"] = self.Object["score"]
+                playerObject.saveInBackground()
             }
             
         }
@@ -96,29 +107,41 @@ class Player
      * joins the player to team t
      * @param t the team object to join
      */
-    func joinTeam(t : Team)
+    func joinTeam(t : Team) -> Bool
     {
-        self.Object["team"] = t.ObjectID
-        addPlayerToTeam(t)
-        pushObject()
-        //start collecting when a team is joined
-        pedometerHelper.startCollection()
+        self.Object["team"] = t.Object
+        if addPlayerToTeam(t)
+        {
+             pushObject()
+             //start collecting when a team is joined
+             pedometerHelper.startCollection()
+             return true
+        }
+       else
+        {
+            return false
+        }
+
+
     }
     
     /**
     * private helper method that adds a player to team t
     * @param t the team object to join
     */
-    private func addPlayerToTeam(t: Team)
+    private func addPlayerToTeam(t: Team) -> Bool
     {
-        var query = PFQuery(className: "Team")
-        query.getObjectInBackgroundWithId(t.ObjectID) {
+        var success : Bool = true
+        teamquery.getObjectInBackgroundWithId(t.ObjectID) {
             (teamObject: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 println(error)
+                success = false
+                
             } else if let teamObject = teamObject {
                 teamObject.addObject(self.Object, forKey: "players")
                 teamObject.saveInBackground()
+                self.Object["team"] = teamObject
             }
             else
             {
@@ -126,6 +149,33 @@ class Player
             }
         }
         t.players.append(self.Object)
+        return success
+    }
+    
+    func leaveTeam()
+    {
+        
+        var pf : PFObject = self.Object["team"] as! PFObject
+        teamquery.getObjectInBackgroundWithId(pf.objectId!){
+            (teamObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                println(error)
+            }
+            else if let teamObject = teamObject
+            {
+                teamObject.removeObject(self.Object, forKey: "players")
+                teamObject.saveInBackground()
+            }
+            else
+            {
+                println("failed for other reasons")
+            }
+            
+        }
+
+        self.Object.setValue(NSNull(), forKey: "team")
+        pushObject()
+        
     }
     
 }
