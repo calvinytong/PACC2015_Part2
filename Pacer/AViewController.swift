@@ -85,7 +85,11 @@ class AViewController: UIViewController, UITableViewDataSource{
                     valueDict.updateValue("", forKey: key)
                     continue
                 } else if let value = userProfile.Object[key]{
-                    valueDict.updateValue("\(value)", forKey: key)
+                    if (value as! NSObject == NSNull()){
+                        valueDict.updateValue("", forKey: key)
+                    } else {
+                        valueDict.updateValue("\(value)", forKey: key)
+                    }
                 } else {
                     valueDict.updateValue("", forKey: key)
                 }
@@ -101,6 +105,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     //Leave team function that triggers when leave team button is pres
     func leaveTeam(sender: UIButton){
         if let currentUser = PFUser.currentUser(){
+        
             var userProfile: Player = Player(player: (currentUser["profile"] as? PFObject)!)
             userProfile.leaveTeam()
             updateUserInfo()
@@ -132,10 +137,16 @@ class AViewController: UIViewController, UITableViewDataSource{
             rowContent = defaultDict[rowTitle]!
             cell.backgroundColor = UIColor.redColor()
         }
-        if (rowTitle == "team" && PFUser.currentUser()!["profile"] as? PFObject != nil){
+        
+        if rowTitle == "team" {
             var leaveTeamButton = createLeaveButton()
             cell.addSubview(leaveTeamButton)
+            leaveTeamButton.hidden = false
+            if PFUser.currentUser()!["profile"] as? PFObject == nil {
+                leaveTeamButton.hidden = true
+            }
         }
+        
         cell.textLabel?.text = rowTitle
         cell.detailTextLabel?.text = rowContent
         return cell

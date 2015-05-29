@@ -35,7 +35,8 @@ class Player
         self.ObjectID = ""
         self.Object = PFObject(className: "Player")
         Object["name"] = name
-        //Object["team"] = PFObject(className: "Team")
+        Object["team"] = NSNull()
+        Object["competition"] = NSNull()
         Object["score"] = 0
         
         Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
@@ -81,14 +82,22 @@ class Player
      */
     func pushObject()
     {
+        println("SAVING BEGINNING")
         query.getObjectInBackgroundWithId(ObjectID) {
             (playerObject: PFObject?, error: NSError?) -> Void in
+            
+            println("BLOCK INITIATED")
             if error != nil {
+                println("ERROR IN SAVING PLAYER")
+
                 println(error)
+                
             } else if let playerObject = playerObject {
+                println("trying to set equal")
                 playerObject["name"] = self.Object["name"]
                 playerObject["team"] = self.Object["team"]
                 playerObject["score"] = self.Object["score"]
+                playerObject.saveInBackground()
             }
             
         }
@@ -145,6 +154,7 @@ class Player
     
     func leaveTeam()
     {
+        
         var pf : PFObject = self.Object["team"] as! PFObject
         teamquery.getObjectInBackgroundWithId(pf.objectId!){
             (teamObject: PFObject?, error: NSError?) -> Void in
@@ -154,6 +164,7 @@ class Player
             else if let teamObject = teamObject
             {
                 teamObject.removeObject(self.Object, forKey: "players")
+                teamObject.saveInBackground()
             }
             else
             {
@@ -161,8 +172,9 @@ class Player
             }
             
         }
-        self.Object["team"] = NSNull()
-        self.pushObject()
+
+        self.Object.setValue(NSNull(), forKey: "team")
+        pushObject()
         
     }
     
