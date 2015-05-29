@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x3M-8i-5tE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="x3M-8i-5tE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -221,28 +221,66 @@
             </objects>
             <point key="canvasLocation" x="945" y="-285"/>
         </scene>
-        <!--View Controller-->
+        <!--Team Details View Controller-->
         <scene sceneID="iKC-dE-TJp">
             <objects>
-                <viewController id="qhk-ve-U9p" sceneMemberID="viewController">
+                <viewController id="qhk-ve-U9p" customClass="TeamDetailsViewController" customModule="Pacer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JWa-G7-6lZ"/>
                         <viewControllerLayoutGuide type="bottom" id="y3b-p3-Woa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QPi-yy-hdH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="kIU-Au-HKb">
+                                <rect key="frame" x="0.0" y="83" width="375" height="273"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzm-cM-x3G">
+                                <rect key="frame" x="0.0" y="623" width="182" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.43647164189999998" blue="0.52231560470000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Challenge">
+                                    <color key="titleColor" red="0.98633870830000003" green="1" blue="0.44691391130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="challengeBtnClicked:" destination="qhk-ve-U9p" eventType="touchUpInside" id="dHU-Zf-pif"/>
+                                </connections>
+                            </button>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp7-TX-biC">
+                                <rect key="frame" x="182" y="623" width="193" height="44"/>
+                                <color key="backgroundColor" red="0.14577333610000001" green="0.48892474650000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.72893511180000004" green="1" blue="0.9146295083" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelBtnClicked:" destination="qhk-ve-U9p" eventType="touchUpInside" id="SrG-jq-AFe"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="cancelBtn" destination="bp7-TX-biC" id="wkw-Lo-6pk"/>
+                        <outlet property="challengeBtn" destination="Bzm-cM-x3G" id="lg3-JN-I8e"/>
+                        <outlet property="tableView" destination="kIU-Au-HKb" id="qZG-I7-lAf"/>
+                        <segue destination="U7T-K8-mj3" kind="modal" identifier="goToChallengeTeam" id="j2W-AW-xGK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0MZ-o5-634" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1464" y="-678"/>
+            <point key="canvasLocation" x="1463.5" y="-990.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Challenge View Controller-->
         <scene sceneID="Wxd-ZH-Z8N">
             <objects>
-                <viewController id="U7T-K8-mj3" sceneMemberID="viewController">
+                <viewController id="U7T-K8-mj3" customClass="ChallengeViewController" customModule="Pacer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bM1-40-liz"/>
                         <viewControllerLayoutGuide type="bottom" id="jKN-CB-rLX"/>
@@ -265,6 +303,9 @@
                                     <color key="titleColor" red="0.98633870830000003" green="1" blue="0.44691391130000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="confirmBtnClicked:" destination="U7T-K8-mj3" eventType="touchUpInside" id="BU4-HW-hmM"/>
+                                </connections>
                             </button>
                             <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZ1-YG-Moe">
                                 <rect key="frame" x="182" y="623" width="193" height="44"/>
@@ -274,19 +315,29 @@
                                     <color key="titleColor" red="0.72893511180000004" green="1" blue="0.9146295083" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelBtnClicked:" destination="U7T-K8-mj3" eventType="touchUpInside" id="YCE-NC-4iC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-wR-OHc">
                                 <rect key="frame" x="75" y="123" width="225" height="214"/>
-                                <color key="backgroundColor" red="1" green="0.65832647549663492" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.75510423542341865" blue="0.22370260840649503" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="RunningMan.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="dashChallengeBtnClicked:" destination="U7T-K8-mj3" eventType="touchUpInside" id="eo7-ab-amJ"/>
+                                </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dash: Race to the Finish!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-DZ-UUT">
                                 <rect key="frame" x="91" y="345" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+<<<<<<< HEAD
                                 <color key="textColor" red="1" green="0.81608273944267784" blue="0.43609873405125688" alpha="1" colorSpace="calibratedRGB"/>
+=======
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+>>>>>>> 5a0f8474b3763c2e1f9d9b1cc486dd144725268a
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -294,6 +345,12 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="cancelBtn" destination="lZ1-YG-Moe" id="ABh-jw-44g"/>
+                        <outlet property="confirmBtn" destination="lZY-bf-M0f" id="Vd5-EG-M2Q"/>
+                        <outlet property="dashChallengeBtn" destination="w6Z-wR-OHc" id="R6q-PM-zsc"/>
+                        <outlet property="dashLabel" destination="nrt-DZ-UUT" id="doR-FB-J03"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BK2-AU-b3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -409,4 +466,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="j2W-AW-xGK"/>
+    </inferredMetricsTieBreakers>
 </document>
