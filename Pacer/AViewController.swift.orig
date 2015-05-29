@@ -3,17 +3,30 @@
 import UIKit
 import Parse
 
+//Constant for removing part of string that happens when anyobject is casted as string
+let removedString = "Optional("
+
+//Cleans the string that is casted from an anyobject
+func objectStringCleaner(input: String) -> String{
+    
+    if count(input) < count(removedString) + 1{
+        return input
+    }
+    let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, count(removedString))
+    var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
+    return result.substringToIndex(result.endIndex.predecessor())
+}
 
 class AViewController: UIViewController, UITableViewDataSource{
     
+    //Welcome message label
     @IBOutlet weak var welcome: UILabel!
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
     
     
-    
+    //Loads the table with relevant information
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a 
         self.view.frame.size.width = SIZE;
         updateUserInfo()
         userTable.reloadData()
@@ -21,11 +34,10 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    //Dynamically adjust the label size based on string length
     func labelSize(inputLabel: UILabel){
-        
         let maxSize: CGSize  = CGSizeMake(187, CGFloat.max)
         var size: CGSize = inputLabel.sizeThatFits(maxSize)
         var rect: CGRect = inputLabel.frame
@@ -33,77 +45,125 @@ class AViewController: UIViewController, UITableViewDataSource{
         inputLabel.frame = rect
     }
     
+    //Logs out the user and segues to the login screen when logout button is pushed
     @IBAction func logoutPressed(sender: UIButton) {
         PFUser.logOutInBackground()
         var parentVC = parentViewController!
         parentVC.performSegueWithIdentifier("goToLogin", sender: parentVC)
     }
     
+    //Reloads the table and the label when the view appears
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
         dispatch_async(dispatch_get_main_queue(), {
             self.welcome.text = PFUser.currentUser() == nil ? "" : "Hello \(PFUser.currentUser()!.username!)!"
             self.labelSize(self.welcome)
         })
-        
+        updateUserInfo()
+        userTable.reloadData()
     }
     
-    
-    //table stuff here
+    //Table variable that can be loaded with data
     @IBOutlet weak var userTable: UITableView!
     
-    //var keyTable:[String] = []
-    //var introDict = Dictionary<String, String>()
+    //Dictionary to retrieve strings for table from
     var valueDict = Dictionary<String, String>()
-    let defaultDict: [String: String] = ["team" : "you're not on a team!"]
-    let keyList: [String] = ["name", "team", "score"]
     
-    let removedString = "Optional("
-    let blankSpace: String = "\u{2422}"
+    //Default dictionary if string from valueDict is blank
+    let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
     
-    func objectStringCleaner(input: String) -> String{
-        
-        let removedRange: Range<String.Index> = input.startIndex...advance(input.startIndex, 8)
-        var result = input.stringByReplacingOccurrencesOfString(removedString, withString: "", range: removedRange)
-        return result.substringToIndex(result.endIndex.predecessor())
-    }
+    //Keys for the valueDict
+    let keyList: [String] = ["name", "team", "competition", "score"]
     
+    
+    //Updates the arrays/dict that acts as data source for the table view
     func updateUserInfo(){
-        var userProfile = PFUser.currentUser()!["profile"] as? PFObject
-        
-        if (userProfile == nil){
-            println("nil userProfile")
-        } else {
-            var userID: String = userProfile!.objectId!
-            var userQuery = PFQuery(className: "Player")
-            var userPlayer: PFObject = userQuery.getObjectWithId(userID)!
-            
-            for key in keyList {
-                valueDict.updateValue("\(userProfile!.objectForKey(key))", forKey: key)
+        if let userProfileReference = PFUser.currentUser()
+        {
+            var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
+            for key in keyList
+            {
+                if key == "competition"
+                {
+                    valueDict.updateValue("", forKey: key)
+                    continue
+<<<<<<< HEAD
+                } else if let value: AnyObject = userProfile.Object[key]{
+                    if (value as! NSObject == NSNull()){
+=======
+                }
+                else if let value = userProfile.Object[key]
+                {
+                    if (value as! NSObject == NSNull())
+                    {
+>>>>>>> 5a0f8474b3763c2e1f9d9b1cc486dd144725268a
+                        valueDict.updateValue("", forKey: key)
+                    }
+                    else
+                    {
+                        valueDict.updateValue("\(value)", forKey: key)
+                    }
+                }
+                else
+                {
+                    valueDict.updateValue("", forKey: key)
+                }
             }
         }
     }
     
+    //Returns number of keys as number of rows for table
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return keyList.count
     }
     
+    //Leave team function that triggers when leave team button is pres
+    func leaveTeam(sender: UIButton){
+        if let currentUser = PFUser.currentUser(){
+        
+            var userProfile: Player = Player(player: (currentUser["profile"] as? PFObject)!)
+            userProfile.leaveTeam()
+            updateUserInfo()
+            userTable.reloadData()
+        }
+    }
+    
+    //Function that creates the leave button
+    func createLeaveButton() -> UIButton{
+        var leaveTeamButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        leaveTeamButton.frame = CGRectMake(310, -5, 55, 55)
+        leaveTeamButton.showsTouchWhenHighlighted = true
+        leaveTeamButton.setTitle("leave", forState: UIControlState.Normal)
+        leaveTeamButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        leaveTeamButton.addTarget(self, action: "leaveTeam:", forControlEvents: UIControlEvents.TouchUpInside)
+        return leaveTeamButton
+    }
+    
+    //Populates the table row by row
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-<<<<<<< HEAD
-        var cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
-=======
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
->>>>>>> bb3db2cd7983b750866dde50dada441aad282bc9
+        var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
         
         let rowTitle = keyList[indexPath.row]
-        var rowContent: String = valueDict[rowTitle]!
-        if rowContent == removedString + ")"{
+        if valueDict[rowTitle] == nil{
+            return cell
+        }
+        var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
+        if rowContent.isEmpty{
             rowContent = defaultDict[rowTitle]!
             cell.backgroundColor = UIColor.redColor()
         }
-        cell.textLabel?.text = "\(rowTitle):"
-        cell.detailTextLabel?.text = objectStringCleaner(rowContent)
         
+        if rowTitle == "team" {
+            var leaveTeamButton = createLeaveButton()
+            cell.addSubview(leaveTeamButton)
+            leaveTeamButton.hidden = false
+            if PFUser.currentUser()!["profile"] as? PFObject == nil {
+                leaveTeamButton.hidden = true
+            }
+        }
+        
+        cell.textLabel?.text = rowTitle
+        cell.detailTextLabel?.text = rowContent
         return cell
     }
 }
