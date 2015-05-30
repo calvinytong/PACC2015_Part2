@@ -104,6 +104,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return range.location != NSNotFound
         })
         searchActive = true;
+        self.joinButton.hidden = true;
+        self.detailButton.hidden = true;
+
         self.tableView.reloadData()
     }
     
@@ -159,6 +162,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     @IBAction func joinPressed(sender: UIButton) {
+        if currentRow == -1{
+            return
+        }
         var teamName: String = filtered[currentRow]
         var teamQuery: PFQuery = PFQuery(className: "Team")
         teamQuery.whereKey("name", equalTo: teamName)

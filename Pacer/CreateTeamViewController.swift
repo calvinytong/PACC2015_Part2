@@ -90,7 +90,16 @@ class CreateTeamViewController: UIViewController {
     
     //Creates a team and attempts to add the users
     func createTeam() -> Bool{
-
+        
+        var teamNameQuery: PFQuery = PFQuery(className: "Team")
+        teamNameQuery.whereKey("name", equalTo: teamNameField.text)
+        if teamNameQuery.findObjects()!.count != 0{
+            var teamAlert: UIAlertView = initializeErrorAlert()
+            teamAlert.message = "Team name has been taken. Please choose a new name."
+            teamAlert.show()
+            return false
+        }
+        
         var newTeam: Team = Team(name: teamNameField.text)
         var usernameNotFoundAlert = initializeErrorAlert()
         var usernameSuccess = true

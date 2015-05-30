@@ -88,7 +88,7 @@ class AViewController: UIViewController, UITableViewDataSource{
                     valueDict.updateValue("", forKey: key)
                     continue
                 }
-                else if let value = userProfile.Object[key]
+                else if let value: AnyObject = userProfile.Object[key]
                 {
                     if (value as! NSObject == NSNull())
                     {
@@ -96,7 +96,14 @@ class AViewController: UIViewController, UITableViewDataSource{
                     }
                     else
                     {
-                        valueDict.updateValue("\(value)", forKey: key)
+                        if key == "team" {
+                            var valuePF: PFObject = value as! PFObject
+                            var query = PFQuery(className: "Team")
+                            var teamPF: PFObject = query.getObjectWithId(valuePF.objectId!)!
+                            valueDict.updateValue(teamPF["name"] as! String, forKey: key)
+                        } else {
+                            valueDict.updateValue("\(value)", forKey: key)
+                        }
                     }
                 }
                 else
@@ -140,14 +147,10 @@ class AViewController: UIViewController, UITableViewDataSource{
         
         let rowTitle = keyList[indexPath.row]
         if valueDict[rowTitle] == nil{
+
             return cell
         }
-        var rowContent: String = objectStringCleaner(valueDict[rowTitle]!)
-        if rowContent.isEmpty{
-            rowContent = defaultDict[rowTitle]!
-            cell.backgroundColor = UIColor.redColor()
-        }
-        
+        var rowContent: String = ""
         if rowTitle == "team" {
             var leaveTeamButton = createLeaveButton()
             cell.addSubview(leaveTeamButton)
@@ -155,7 +158,15 @@ class AViewController: UIViewController, UITableViewDataSource{
             if PFUser.currentUser()!["profile"] as? PFObject == nil {
                 leaveTeamButton.hidden = true
             }
+            rowContent = valueDict[rowTitle]!
+        } else {
+            rowContent = objectStringCleaner(valueDict[rowTitle]!)
         }
+        if rowContent.isEmpty{
+            rowContent = defaultDict[rowTitle]!
+            cell.backgroundColor = UIColor.redColor()
+        }
+
         
         cell.textLabel?.text = rowTitle
         cell.detailTextLabel?.text = rowContent
