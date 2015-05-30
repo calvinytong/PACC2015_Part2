@@ -54,6 +54,7 @@ class CreateTeamViewController: UIViewController {
     //Tries to create team and dismisses the current view if successful
     @IBAction func doneBtnClick(sender: UIButton) {
         if createTeam() {
+            NSNotificationCenter.defaultCenter().postNotificationName("refresh", object: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

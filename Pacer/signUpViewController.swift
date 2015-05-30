@@ -32,7 +32,15 @@ class signUpViewController : UIViewController {
     
     //Creates an user account when the "Done" button is tapped
     @IBAction func donePress(sender: UIButton){
-        createLogin()
+        if createUsername.text.uppercaseString.rangeOfString("JOSEPH") != nil{
+            var failAlert: UIAlertView = UIAlertView()
+            failAlert.title = "Error Creating Account"
+            failAlert.message = "Plz no 322"
+            failAlert.addButtonWithTitle("This is a text box do not press.")
+            failAlert.show()
+        } else {
+            createLogin()
+        }
     }
     
     //Dismisses the sign up view to go back to the login view

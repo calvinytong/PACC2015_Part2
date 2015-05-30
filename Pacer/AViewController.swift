@@ -27,11 +27,17 @@ class AViewController: UIViewController, UITableViewDataSource{
     //Loads the table with relevant information
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateInfoOnNotify:", name: "refresh", object: nil)
         self.view.frame.size.width = SIZE;
         updateUserInfo()
         userTable.reloadData()
+        
     }
     
+    func updateInfoOnNotify(notification: NSNotification){
+        updateUserInfo()
+        userTable.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -125,8 +131,10 @@ class AViewController: UIViewController, UITableViewDataSource{
         
             var userProfile: Player = Player(player: (currentUser["profile"] as? PFObject)!)
             userProfile.leaveTeam()
-            updateUserInfo()
-            userTable.reloadData()
+            //updateUserInfo()
+            //userTable.reloadData()
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("refresh", object: nil)
         }
     }
     
@@ -155,7 +163,7 @@ class AViewController: UIViewController, UITableViewDataSource{
             var leaveTeamButton = createLeaveButton()
             cell.addSubview(leaveTeamButton)
             leaveTeamButton.hidden = false
-            if PFUser.currentUser()!["profile"] as? PFObject == nil {
+            if valueDict[rowTitle]! == "" {
                 leaveTeamButton.hidden = true
             }
             rowContent = valueDict[rowTitle]!

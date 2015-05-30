@@ -56,6 +56,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         
         tableView.reloadData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "shuaXin:", name: "refresh", object: nil)
+    }
+    
+    func shuaXin(notification: NSNotification){
+        updateUserInfo()
+        tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -171,9 +177,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var teamList: Array = teamQuery.findObjects()!
         var currentPlayer: Player = Player(player: PFUser.currentUser()!["profile"] as! PFObject)
         
+        
+
         for obj in teamList {
             var teamObj: Team = Team(team: obj as! PFObject)
             currentPlayer.joinTeam(teamObj)
+            NSNotificationCenter.defaultCenter().postNotificationName("refresh", object: nil)
             return
         }
     }
