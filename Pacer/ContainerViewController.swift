@@ -13,6 +13,9 @@ import Parse
 //View controller for the scroll view that acts as our Snapchat-esque main page
 class ContainerViewController: UIViewController {
     
+    //Team object passed to here from subview so it can be put in segues
+    var passedTeam: PFObject!
+    
     // Outlet used in storyboard
     @IBOutlet var scrollView: UIScrollView?;
     
@@ -75,7 +78,13 @@ class ContainerViewController: UIViewController {
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight);
         self.scrollView!.sizeToFit()
     }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToTeamDetails"{
+            var passed = segue.destinationViewController as! TeamDetailsViewController
+            passed.team = self.passedTeam
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

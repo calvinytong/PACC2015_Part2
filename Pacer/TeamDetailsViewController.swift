@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import Parse
 
 class TeamDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var challengeBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var teamName: UILabel!
     
+    var team: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        println(team)
+        teamName.text = team["name"] as? String
         // Do any additional setup after loading the view.
     }
 

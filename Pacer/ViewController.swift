@@ -78,8 +78,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    @IBAction func detailPressed(sender: UIButton) {
+        var passed = parentViewController as! ContainerViewController
+        var teamName: String = filtered[currentRow]
+        var teamQuery: PFQuery = PFQuery(className: "Team")
+        teamQuery.whereKey("name", equalTo: teamName)
+        var teamList: Array = teamQuery.findObjects()!
+        for obj in teamList {
+            passed.passedTeam = obj as! PFObject
+            break
+        }
+        parentViewController!.performSegueWithIdentifier("goToTeamDetails", sender: parentViewController!)
+    }
     
-    
+        
     
     //Functions that change the search active status based on whether the search bar is active or not
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
