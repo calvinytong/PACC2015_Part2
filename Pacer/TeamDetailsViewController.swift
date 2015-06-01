@@ -9,20 +9,20 @@
 import UIKit
 import Parse
 
-class TeamDetailsViewController: UIViewController {
+class TeamDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var challengeBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var teamName: UILabel!
     
-    var team: PFObject!
-    
+    var team: Team!
     override func viewDidLoad() {
         super.viewDidLoad()
-        println(team)
-        teamName.text = team["name"] as? String
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
+        teamName.text = team.Object["name"] as? String
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,13 +30,15 @@ class TeamDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToChallengeTeam"{
+            var passed = segue.destinationViewController as! ChallengeViewController
+            passed.passedTeam = team
+    
+        }
+    }
 
     @IBAction func challengeBtnClicked(sender: AnyObject) {
-        // goes to challenge page
-/*
-        var parentVC = parentViewController!
-        parentVC.performSegueWithIdentifier("goToChallengeTeam", sender: self)
-*/
         self.performSegueWithIdentifier("goToChallengeTeam", sender: self)
     }
     
@@ -44,6 +46,23 @@ class TeamDetailsViewController: UIViewController {
         // goes back
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println("what up boys \(team.players.count)")
+        return team.players.count
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
+        var player = Player(player: team.players[indexPath.row])
+        cell.textLabel?.text = player.Object["name"] as! String
+        var playerScore: Int = player.Object["score"] as! Int
+        cell.detailTextLabel?.text = "\(playerScore)"
+        return cell
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -53,5 +72,7 @@ class TeamDetailsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
 
 }

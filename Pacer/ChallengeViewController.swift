@@ -16,6 +16,8 @@ class ChallengeViewController: UIViewController {
     @IBOutlet weak var dashChallengeBtn: UIButton!
     @IBOutlet weak var dashLabel: UILabel!
     
+    var passedTeam: Team!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dashChallengeBtn.backgroundColor

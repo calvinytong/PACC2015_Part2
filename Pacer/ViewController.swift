@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         teamQuery.whereKey("name", equalTo: teamName)
         var teamList: Array = teamQuery.findObjects()!
         for obj in teamList {
-            passed.passedTeam = obj as! PFObject
+            passed.passedTeam = Team(team: obj as! PFObject)
             break
         }
         parentViewController!.performSegueWithIdentifier("goToTeamDetails", sender: parentViewController!)

@@ -280,7 +280,7 @@
                     <connections>
                         <outlet property="cancelBtn" destination="bp7-TX-biC" id="wkw-Lo-6pk"/>
                         <outlet property="challengeBtn" destination="Bzm-cM-x3G" id="lg3-JN-I8e"/>
-                        <outlet property="tableView" destination="kIU-Au-HKb" id="qZG-I7-lAf"/>
+                        <outlet property="tableView" destination="kIU-Au-HKb" id="rwb-Ep-VvC"/>
                         <outlet property="teamName" destination="7zR-qL-5Uq" id="kIQ-WA-OwF"/>
                         <segue destination="U7T-K8-mj3" kind="modal" identifier="goToChallengeTeam" id="j2W-AW-xGK"/>
                     </connections>

@@ -14,7 +14,7 @@ import Parse
 class ContainerViewController: UIViewController {
     
     //Team object passed to here from subview so it can be put in segues
-    var passedTeam: PFObject!
+    var passedTeam: Team!
     
     // Outlet used in storyboard
     @IBOutlet var scrollView: UIScrollView?;
