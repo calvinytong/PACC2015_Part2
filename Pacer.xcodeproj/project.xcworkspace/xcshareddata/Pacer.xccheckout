@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>E123703B-F563-4477-89C4-733466EBB1AB</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Pacer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>52B61D0D7E3F747D77FA04FF31F4004FAFFF5369</key>
 		<string>https://github.com/ctong1234/PACC2015_Part2.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Pacer.xcodeproj/project.xcworkspace</string>
+	<string>Pacer.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>52B61D0D7E3F747D77FA04FF31F4004FAFFF5369</key>

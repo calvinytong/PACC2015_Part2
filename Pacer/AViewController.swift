@@ -32,9 +32,8 @@ class AViewController: UIViewController, UITableViewDataSource{
         self.userTable.rowHeight = 60
         self.userTable.frame.size.height = 240
         updateUserInfo()
-
         userTable.reloadData()
-
+        
         var nib = UINib(nibName: "CustomProfileCell", bundle: nil)
         userTable.registerNib(nib, forCellReuseIdentifier: "profileCell")
         
@@ -45,7 +44,6 @@ class AViewController: UIViewController, UITableViewDataSource{
     func updateInfoOnNotify(notification: NSNotification){
         updateUserInfo()
         userTable.reloadData()
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,9 +73,7 @@ class AViewController: UIViewController, UITableViewDataSource{
             self.labelSize(self.welcome)
         })
         updateUserInfo()
-        println("info updated")
         userTable.reloadData()
-        println("reloaded")
     }
     
     //Table variable that can be loaded with data
@@ -96,7 +92,6 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     //Updates the arrays/dict that acts as data source for the table view
     func updateUserInfo(){
-        println("starting update")
         if let userProfileReference = PFUser.currentUser()
         {
             var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
@@ -106,20 +101,16 @@ class AViewController: UIViewController, UITableViewDataSource{
                 {
                     //This is where the problem is. If you fix parse manager this should work
                     var teamPointer = userProfile.Object["team"] as? PFObject
-                    println("get team")
                     if teamPointer != nil{
                         var teamerino: Team = mainParseManager.pullTeam(teamPointer!.objectId!)
-                        println("team set")
-                        println(teamerino.Object)
-                        var compPointer : PFObject = (teamerino.Object["competition"] as? PFObject)!
-                        compPointer.fetch()
-                        println("comp set")
-                            println("comp not null")
-                            println(compPointer)
-                            //var comperino: Competition = mainParseManager.pullComp(compPointer?.objectId!)
-                            var teamName : String = compPointer["name"] as! String
-                            valueDict.updateValue(teamName, forKey: key)
-                            println("value updated")
+                        var compPointer = teamerino.Object["competition"] as? PFObject
+                        if compPointer != nil {
+                            var comperino: Competition = mainParseManager.pullComp(compPointer!.objectId!)
+                            valueDict.updateValue(comperino.Object["name"] as! String, forKey: key)
+
+                        } else {
+                            valueDict.updateValue("", forKey: key)
+                        }
                     } else {
                         valueDict.updateValue("", forKey: key)
                     }
@@ -149,7 +140,6 @@ class AViewController: UIViewController, UITableViewDataSource{
                 }
             }
         }
-        println("update finished")
     }
     
     //Returns number of keys as number of rows for table
