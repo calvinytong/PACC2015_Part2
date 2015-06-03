@@ -88,6 +88,15 @@ class Team
         }
     }
     
+    func challengeTeam(t : Team, name : String)
+    {
+        var pf : PFObject = PFObject(className: "Competition")
+        pf["name"] = name
+        pf["team1"] = self.Object
+        pf["team2"] = t.Object
+        var comp = Competition(Competition: pf)
+    }
+    
     /**
     * calculates the total score of the team
     * @return tempscore the score of the team
