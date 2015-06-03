@@ -52,6 +52,7 @@ class Competition
      */
     init(Competition : PFObject)
     {
+        
         self.Object = Competition
         self.Object.save()
         self.ObjectID = Object.objectId!

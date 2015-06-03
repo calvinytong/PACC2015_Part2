@@ -16,6 +16,7 @@ class ParseManager
     var temparray : [PFObject] = [PFObject]()
     var teamarray : [Team] = [Team]()
     var teamNames:[String] = []
+    var compArray : [Competition] = [Competition]()
 
     //swift has weird stuff. Can't just do a static class (wtf apple)
     init()
@@ -75,6 +76,25 @@ class ParseManager
         
     }
     
+    func pullComps(completionHandler: (Bool!, NSError!) -> Void)
+    {
+        self.teamarray = []
+        self.teamNames = []
+        var completed = false
+        pullAllObjects("Competition", completionHandler: {
+            (success: Bool!, error: NSError!) -> Void in
+            if success == true
+            {
+                for o in self.temparray
+                {
+                    self.compArray.append(Competition(Competition: o))
+                }
+                completionHandler(true, nil)
+            }
+        })
+        
+    }
+    
     /**
     * private function to pull a single object off of the cloud
     * @param id the object id of the PFobject
@@ -83,21 +103,9 @@ class ParseManager
     */
     private func pullObject(id : String, type : String) -> PFObject
     {
-        var tempobj : PFObject = PFObject()
+        //var tempobj : PFObject = PFObject()
         var query = PFQuery(className: type)
-        query.getObjectInBackgroundWithId(id) {
-            (playerObject: PFObject?, error: NSError?) -> Void in
-            if error != nil
-            {
-                println(error)
-            }
-            else if let playerObject = playerObject
-            {
-                tempobj = playerObject
-                
-            }
-        }
-        return tempobj
+        return query.getObjectWithId(id)!
     }
     
     /**

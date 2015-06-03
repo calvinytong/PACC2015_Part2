@@ -35,6 +35,7 @@ class Team
         self.Object["name"] = name
         self.Object["players"] = self.players
         self.Object["score"] = 0
+        self.Object["competition"] = NSNull()
         self.Object.save()
         self.ObjectID = self.Object.objectId!
         println(self.ObjectID)
@@ -84,6 +85,9 @@ class Team
                 playerObject["name"] = self.Object["name"]
                 playerObject["players"] = self.Object["players"]
                 playerObject["score"] = self.Object["score"]
+                playerObject["competition"] = self.Object["competition"]
+                playerObject.saveInBackground()
+            
             }
         }
     }
@@ -95,6 +99,10 @@ class Team
         pf["team1"] = self.Object
         pf["team2"] = t.Object
         var comp = Competition(Competition: pf)
+        self.Object["competition"] = pf
+        t.Object["competition"] = pf
+        t.pushObject()
+        self.pushObject()
     }
     
     /**

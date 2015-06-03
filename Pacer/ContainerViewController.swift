@@ -82,6 +82,9 @@ class ContainerViewController: UIViewController {
         if segue.identifier == "goToTeamDetails"{
             var passed = segue.destinationViewController as! TeamDetailsViewController
             passed.team = self.passedTeam
+        } else if segue.identifier == "goToChallengeTeam"{
+            var passed = segue.destinationViewController as! ChallengeViewController
+            passed.passedTeam = self.passedTeam
         }
     }
 

@@ -18,6 +18,8 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
     var filtered:[String] = []
     var SIZE = UIScreen.mainScreen().bounds.width; // sets width
     
+    var currentRow: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,6 +100,7 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
         NSLog("You DE-selected cell number: \(indexPath.row)!")
         self.challengeBtn.hidden = true;
         self.detailsBtn.hidden = true;
+        
     }
     
     
@@ -145,10 +148,21 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
         NSLog("You selected cell number: \(indexPath.row)!")
         self.challengeBtn.hidden = false;
         self.detailsBtn.hidden = false;
+        currentRow = indexPath.row
     }
     @IBAction func challengeBtnClick(sender: AnyObject) {
-        var parentVC = parentViewController!
-        parentVC.performSegueWithIdentifier("goToChallengeTeam", sender: self)
+        //var parentVC = parentViewController!
+        var passed = parentViewController as! ContainerViewController
+        var teamName: String = data[currentRow]
+        var teamQuery: PFQuery = PFQuery(className: "Team")
+        teamQuery.whereKey("name", equalTo: teamName)
+        var teamList: Array = teamQuery.findObjects()!
+        for obj in teamList {
+            passed.passedTeam = Team(team: obj as! PFObject)
+            break
+        }
+
+        passed.performSegueWithIdentifier("goToChallengeTeam", sender: self)
     }
     
     @IBAction func detailsBtnClick(sender: AnyObject) {

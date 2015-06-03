@@ -88,6 +88,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     //Keys for the valueDict
     let keyList: [String] = ["name", "team", "competition", "score"]
     
+    var mainParseManager: ParseManager = ParseManager()
     
     //Updates the arrays/dict that acts as data source for the table view
     func updateUserInfo(){
@@ -98,8 +99,22 @@ class AViewController: UIViewController, UITableViewDataSource{
             {
                 if key == "competition"
                 {
-                    valueDict.updateValue("", forKey: key)
-                    continue
+                    //This is where the problem is. If you fix parse manager this should work
+                    var teamPointer = userProfile.Object["team"] as? PFObject
+                    if teamPointer != nil{
+                        var teamerino: Team = mainParseManager.pullTeam(teamPointer!.objectId!)
+                        var compPointer = teamerino.Object["competition"] as? PFObject
+                        if compPointer != nil {
+                            var comperino: Competition = mainParseManager.pullComp(compPointer!.objectId!)
+                            valueDict.updateValue(comperino.Object["name"] as! String, forKey: key)
+
+                        } else {
+                            valueDict.updateValue("", forKey: key)
+                        }
+                    } else {
+                        valueDict.updateValue("", forKey: key)
+                    }
+                    
                 }
                 else if let value: AnyObject = userProfile.Object[key]
                 {
