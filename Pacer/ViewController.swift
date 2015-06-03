@@ -48,6 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.view.frame.size.width = SIZE;
         tableView.frame.size.width = SIZE;
         
+        
         /* Setup delegates */
         tableView.delegate = self
         tableView.dataSource = self
@@ -138,6 +139,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     //Constants similar to AViewController for fetching data and putting it in an array for table to display
+    
+    var playerList: [(name: String, score: Int)] = []
+    
     var valueDict = Dictionary<String, String>()
     
     let defaultDict: [String: String] = ["team" : "you're not on a team!", "competition" : "you're not in a competition!"]
@@ -161,8 +165,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Updates user information in the array for table to display
     func updateUserInfo(){
+        
         if let userProfileReference = PFUser.currentUser(){
             var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
+            /*
             for key in keyList {
                 if key == "competition"{
                     valueDict.updateValue("", forKey: key)
@@ -175,6 +181,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                 } else {
                     valueDict.updateValue("", forKey: key)
+                }
+            }
+            */
+            if let teamPointer: PFObject = userProfile.Object["team"] as? PFObject{
+                var currentTeam: Team = Team(team: teamPointer)
+                for player in currentTeam.players {
+                    var tmpQuery = PFQuery(className: "Player")
+                    tmpQuery.getObjectWithId(player.objectId!)
+                    var tmpPlayer: PFObject = tmpQuery.findObjects()![0] as! PFObject
+                    playerList.append((name: tmpPlayer["name"] as! String, score: tmpPlayer["score"] as! Int))
+                    println("yoloswag")
                 }
             }
         }
@@ -202,7 +219,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(!searchActive)
         {
-            return keyList.count
+            if (playerList.count == 0){
+                return 1
+            } else {
+                return playerList.count
+            }
         }
         else if(searchActive)
         {
@@ -218,6 +239,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if(!searchActive) // checks if team exists
         {
+            /*
             let rowTitle = keyList[indexPath.row]
             if (valueDict[rowTitle] == nil){
                 return cell
@@ -228,13 +250,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 rowContent = defaultDict[rowTitle]!
                 cell.backgroundColor = UIColor.redColor()
             }
+            */
+            
+            if playerList.count == 0{
+                cell.textLabel?.text = "You're not in a team yet."
+                return cell
+            } else {
+                var x = playerList[indexPath.row]
+                
+                cell.textLabel?.text = x.name
+                cell.detailTextLabel?.text = "\(x.score)"
+                return cell;
+            }
             
             
-            
-
-            cell.textLabel?.text = rowTitle
-            cell.detailTextLabel?.text = rowContent
-            return cell;
         }
         else if(searchActive)
         {
