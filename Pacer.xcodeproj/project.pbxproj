@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3E19C28D1B011A4500B25E84 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19C28C1B011A4500B25E84 /* loginViewController.swift */; };
-		3E1D59B81B1E022200C00959 /* CustomProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1D59B71B1E022200C00959 /* CustomProfileCell.xib */; };
-		3E1D59BA1B1E05EC00C00959 /* CustomProfileCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1D59B91B1E05EB00C00959 /* CustomProfileCellVC.swift */; };
 		3E3F155C1B04453300FF09DB /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F155B1B04453300FF09DB /* signUpViewController.swift */; };
 		3E4302981B01AD48003E4727 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4302961B01AD48003E4727 /* Bolts.framework */; };
 		3E4302991B01AD48003E4727 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4302971B01AD48003E4727 /* Parse.framework */; };
@@ -65,8 +63,6 @@
 
 /* Begin PBXFileReference section */
 		3E19C28C1B011A4500B25E84 /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
-		3E1D59B71B1E022200C00959 /* CustomProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomProfileCell.xib; sourceTree = "<group>"; };
-		3E1D59B91B1E05EB00C00959 /* CustomProfileCellVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomProfileCellVC.swift; sourceTree = "<group>"; };
 		3E3F155B1B04453300FF09DB /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		3E4302961B01AD48003E4727 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		3E4302971B01AD48003E4727 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -215,8 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				7C6074D71B16944600500489 /* RunningMan.png */,
-				3E1D59B91B1E05EB00C00959 /* CustomProfileCellVC.swift */,
-				3E1D59B71B1E022200C00959 /* CustomProfileCell.xib */,
 				7C5EFF461AF9D9A600A8E425 /* AViewController.swift */,
 				7C5EFF471AF9D9A600A8E425 /* AViewController.xib */,
 				7C4DE0FC1B08737500514F7E /* ViewController.swift */,
@@ -337,7 +331,6 @@
 				7C5EFF2C1AF9D8A800A8E425 /* Main.storyboard in Resources */,
 				7C5EFF311AF9D8A800A8E425 /* LaunchScreen.xib in Resources */,
 				7C5EFF2E1AF9D8A800A8E425 /* Images.xcassets in Resources */,
-				3E1D59B81B1E022200C00959 /* CustomProfileCell.xib in Resources */,
 				7C7F37561B11A735000D67FF /* LeaderboardTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,7 +358,6 @@
 				7C4DE0FE1B08737500514F7E /* ViewController.swift in Sources */,
 				7C5EFF291AF9D8A800A8E425 /* ContainerViewController.swift in Sources */,
 				3E4302B71B01AE13003E4727 /* Player.swift in Sources */,
-				3E1D59BA1B1E05EC00C00959 /* CustomProfileCellVC.swift in Sources */,
 				7C7F37521B101974000D67FF /* CreateTeamViewController.swift in Sources */,
 				7CF9E0B51B15A1E400953CA3 /* ChallengeViewController.swift in Sources */,
 				7C7F37551B11A735000D67FF /* LeaderboardTableViewController.swift in Sources */,
