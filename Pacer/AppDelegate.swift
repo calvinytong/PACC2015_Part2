@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         //Parse.setApplicationId("ToQUEpgblTWIHPCsCrhQ2gCsUF7TLVeVnpL7t8bm", clientKey: "b3nt5OWqEteywDcF3g0r0niAo96gXqekkf2caVsw")
         
-        Parse.setApplicationId("eVnjS0m3NwsNweLNxo8MqmDKekwtQSEGUZF8gbVc", clientKey: "xtCHGwgbVbsRMnNmqHdFKWKEkBy5VtqPV4CzT5eY")
+        Parse.setApplicationId("Hm5VsLnCKTY0CHO2myswiUU4qJsqxjVd4wVk1IdF", clientKey: "Cq8ZEfIA5cpz20DCweQno3JBtGcBvPlLyc5I5bd0")
         return true
     }
     
