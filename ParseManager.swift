@@ -101,7 +101,7 @@ class ParseManager
     * @param type the class the object is to be pulled from
     * @return the pfobject
     */
-    private func pullObject(id : String, type : String) -> PFObject
+    func pullObject(id : String, type : String) -> PFObject
     {
         //var tempobj : PFObject = PFObject()
         var query = PFQuery(className: type)

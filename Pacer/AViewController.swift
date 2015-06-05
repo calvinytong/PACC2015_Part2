@@ -90,26 +90,31 @@ class AViewController: UIViewController, UITableViewDataSource{
             var userProfile: Player = Player(player: (userProfileReference["profile"] as? PFObject)!)
             for key in keyList
             {
-                if key == "competition"
-                {
-                    //This is where the problem is. If you fix parse manager this should work
-                    var teamPointer = userProfile.Object["team"] as? PFObject
-                    if teamPointer != nil{
-                        var teamerino: Team = mainParseManager.pullTeam(teamPointer!.objectId!)
-                        var compPointer = teamerino.Object["competition"] as? PFObject
-                        if compPointer != nil {
-                            var comperino: Competition = mainParseManager.pullComp(compPointer!.objectId!)
-                            valueDict.updateValue(comperino.Object["name"] as! String, forKey: key)
-
-                        } else {
-                            valueDict.updateValue("", forKey: key)
-                        }
-                    } else {
-                        valueDict.updateValue("", forKey: key)
-                    }
-                    
-                }
-                else if let value: AnyObject = userProfile.Object[key]
+//                if key == "competition"
+//                {
+//                    //This is where the problem is. If you fix parse manager this should work
+//                    var teamPointer = userProfile.Object["team"] as? PFObject
+//                    if teamPointer != nil{
+//                        teamPointer!.fetch()
+//                        var teamerino: PFObject = mainParseManager.pullObject(teamPointer!.objectId!, type: "Team")
+//                        var compPointer = teamerino["competition"] as? PFObject
+//                        println(compPointer)
+//                        if compPointer != nil {
+//                             compPointer!.fetch()
+//                           var comperino: PFObject = mainParseManager.pullObject(compPointer!.objectId!, type: "Competition")
+//                            valueDict.updateValue(comperino["name"] as! String, forKey: key)
+//
+//                        }
+//                            else {
+//                            valueDict.updateValue("", forKey: key)
+//                        }
+//                    }
+//                    else {
+//                        valueDict.updateValue("", forKey: key)
+//                    }
+                
+//                }
+                if let value: AnyObject = userProfile.Object[key]
                 {
                     if (value as! NSObject == NSNull())
                     {
@@ -132,6 +137,7 @@ class AViewController: UIViewController, UITableViewDataSource{
                     valueDict.updateValue("", forKey: key)
                 }
             }
+            sleep(2)
         }
     }
     

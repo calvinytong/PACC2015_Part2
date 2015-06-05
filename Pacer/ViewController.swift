@@ -184,7 +184,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
             */
+            
             if let teamPointer: PFObject = userProfile.Object["team"] as? PFObject{
+                teamPointer.fetch()
                 var currentTeam: Team = Team(team: teamPointer)
                 for player in currentTeam.players {
                     var tmpQuery = PFQuery(className: "Player")
