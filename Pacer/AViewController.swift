@@ -197,9 +197,9 @@ class AViewController: UIViewController, UITableViewDataSource{
         }
         if rowContent.isEmpty{
             rowContent = defaultDict[rowTitle]!
-            cell.backgroundColor = UIColor.redColor()
+            cell.cellValue.textColor = UIColor.redColor()
         } else {
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.cellValue.textColor = UIColor.darkGrayColor()
         }
         cell.cellTitle.text = rowTitle
         cell.cellValue.text = rowContent

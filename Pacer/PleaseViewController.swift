@@ -125,6 +125,8 @@ class PleaseViewController: UIViewController, UITableViewDataSource, UITableView
             //            cell.textLabel?.text = "test"
             var str = String(stringInterpolationSegment: mainParseManager.teamarray[indexPath.row].Object["score"])
             cell.detailTextLabel?.text = str.substringWithRange(Range<String.Index>(start: advance(str.startIndex, 9), end: advance(str.endIndex, -1)))
+            cell.detailTextLabel?.textColor = UIColor(red: 0.73, green: 0.65, blue: 0.97, alpha: 0.9)
+            cell.textLabel?.textColor = UIColor.darkGrayColor()
             return cell
         }
         else
