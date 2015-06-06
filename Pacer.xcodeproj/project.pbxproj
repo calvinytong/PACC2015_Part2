@@ -29,6 +29,8 @@
 		3E4302B91B01AF87003E4727 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4302B81B01AF87003E4727 /* Team.swift */; };
 		3E4302BB1B01B01C003E4727 /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4302BA1B01B01C003E4727 /* Competition.swift */; };
 		3E48CA631B0938020074961A /* PedometerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E48CA621B0938020074961A /* PedometerHelper.swift */; };
+		3EF13C521B236C630013B91C /* ProfileViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EF13C511B236C630013B91C /* ProfileViewCell.xib */; };
+		3EF13C541B236ED90013B91C /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF13C531B236ED90013B91C /* ProfileViewCell.swift */; };
 		7C4DE0FE1B08737500514F7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4DE0FC1B08737500514F7E /* ViewController.swift */; };
 		7C4DE0FF1B08737500514F7E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4DE0FD1B08737500514F7E /* ViewController.xib */; };
 		7C5EFF271AF9D8A800A8E425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5EFF261AF9D8A800A8E425 /* AppDelegate.swift */; };
@@ -84,6 +86,8 @@
 		3E4302B81B01AF87003E4727 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		3E4302BA1B01B01C003E4727 /* Competition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		3E48CA621B0938020074961A /* PedometerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedometerHelper.swift; sourceTree = "<group>"; };
+		3EF13C511B236C630013B91C /* ProfileViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewCell.xib; sourceTree = "<group>"; };
+		3EF13C531B236ED90013B91C /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		7C4DE0FC1B08737500514F7E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7C4DE0FD1B08737500514F7E /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		7C5EFF211AF9D8A800A8E425 /* Pacer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pacer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,8 +215,10 @@
 			isa = PBXGroup;
 			children = (
 				7C6074D71B16944600500489 /* RunningMan.png */,
-				7C5EFF461AF9D9A600A8E425 /* AViewController.swift */,
 				7C5EFF471AF9D9A600A8E425 /* AViewController.xib */,
+				7C5EFF461AF9D9A600A8E425 /* AViewController.swift */,
+				3EF13C511B236C630013B91C /* ProfileViewCell.xib */,
+				3EF13C531B236ED90013B91C /* ProfileViewCell.swift */,
 				7C4DE0FC1B08737500514F7E /* ViewController.swift */,
 				7C4DE0FD1B08737500514F7E /* ViewController.xib */,
 				7C5EFF4A1AF9D9A600A8E425 /* CViewController.swift */,
@@ -327,6 +333,7 @@
 				7C5EFF511AF9D9A600A8E425 /* CViewController.xib in Resources */,
 				7CF9E0B31B15940900953CA3 /* PleaseViewController.xib in Resources */,
 				7C6074D81B16944600500489 /* RunningMan.png in Resources */,
+				3EF13C521B236C630013B91C /* ProfileViewCell.xib in Resources */,
 				7C5EFF4D1AF9D9A600A8E425 /* AViewController.xib in Resources */,
 				7C5EFF2C1AF9D8A800A8E425 /* Main.storyboard in Resources */,
 				7C5EFF311AF9D8A800A8E425 /* LaunchScreen.xib in Resources */,
@@ -349,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF13C541B236ED90013B91C /* ProfileViewCell.swift in Sources */,
 				3E3F155C1B04453300FF09DB /* signUpViewController.swift in Sources */,
 				3E4302B91B01AF87003E4727 /* Team.swift in Sources */,
 				7CF9E0B21B15940900953CA3 /* PleaseViewController.swift in Sources */,

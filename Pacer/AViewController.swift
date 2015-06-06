@@ -31,6 +31,10 @@ class AViewController: UIViewController, UITableViewDataSource{
         self.view.frame.size.width = SIZE;
         updateUserInfo()
         userTable.reloadData()
+        self.userTable.frame.size.height = 240
+        self.userTable.rowHeight = 60
+        var cellNib = UINib(nibName: "ProfileViewCell", bundle: nil)
+        userTable.registerNib(cellNib, forCellReuseIdentifier: "profileViewCell")
         
     }
     
@@ -162,7 +166,7 @@ class AViewController: UIViewController, UITableViewDataSource{
     //Function that creates the leave button
     func createLeaveButton() -> UIButton{
         var leaveTeamButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        leaveTeamButton.frame = CGRectMake(310, -5, 55, 55)
+        leaveTeamButton.frame = CGRectMake(310, 0, 55, 55)
         leaveTeamButton.showsTouchWhenHighlighted = true
         leaveTeamButton.setTitle("leave", forState: UIControlState.Normal)
         leaveTeamButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
@@ -172,8 +176,8 @@ class AViewController: UIViewController, UITableViewDataSource{
     
     //Populates the table row by row
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
-        
+        //var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
+        var cell: ProfileViewCell = self.userTable.dequeueReusableCellWithIdentifier("profileViewCell") as! ProfileViewCell
         let rowTitle = keyList[indexPath.row]
         if valueDict[rowTitle] == nil{
 
@@ -194,11 +198,11 @@ class AViewController: UIViewController, UITableViewDataSource{
         if rowContent.isEmpty{
             rowContent = defaultDict[rowTitle]!
             cell.backgroundColor = UIColor.redColor()
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
         }
-
-        
-        cell.textLabel?.text = rowTitle
-        cell.detailTextLabel?.text = rowContent
+        cell.cellTitle.text = rowTitle
+        cell.cellValue.text = rowContent
         return cell
     }
 }

@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import UIKit
+
+class ProfileViewCell: UITableViewCell{
+    
+    @IBOutlet weak var cellValue: UILabel!
+    @IBOutlet weak var cellTitle: UILabel!
+    @IBOutlet weak var profileIcon: UIImageView!
+}
