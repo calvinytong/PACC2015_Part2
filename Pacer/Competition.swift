@@ -33,7 +33,8 @@ class Competition
         self.Object["name"] = name
         self.Object["team1"] = Team1.Object
         self.Object["team2"] = Team2.Object
-        
+        //self.Object.saveInBackground()
+        /*
         self.Object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success)
             {
@@ -45,6 +46,7 @@ class Competition
                 print("we lost boyz")
             }
         }
+        */
     }
     
     /**
@@ -54,7 +56,7 @@ class Competition
     {
         
         self.Object = Competition
-        self.Object.save()
+        //self.Object.save()
         self.ObjectID = Object.objectId!
     }
     

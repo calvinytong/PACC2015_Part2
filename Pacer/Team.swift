@@ -94,15 +94,18 @@ class Team
     
     func challengeTeam(t : Team, name : String)
     {
-        var pf : PFObject = PFObject(className: "Competition")
-        pf["name"] = name
-        pf["team1"] = self.Object
-        pf["team2"] = t.Object
-        var comp = Competition(Competition: pf)
-        self.Object["competition"] = pf
-        t.Object["competition"] = pf
-        t.pushObject()
-        self.pushObject()
+        var comp: Competition = Competition(name: name, Team1: self, Team2: t)
+        println("done with comp")
+        self.Object["competition"] = comp.Object
+        t.Object["competition"] = comp.Object
+        //t.Object.saveInBackground()
+        println("done with obj t")
+        //self.pushObject()
+        println("done with own obj")
+        let saveArray: [PFObject] = [comp.Object, self.Object, t.Object]
+        PFObject.saveAll(saveArray)
+        println("mission accomplished")
+        
     }
     
     /**

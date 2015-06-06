@@ -55,10 +55,15 @@ class ChallengeViewController: UIViewController {
         var currentUser = PFUser.currentUser()!
         var userProfile: Player = Player(player: (currentUser["profile"] as? PFObject)!)
         var team = Team(team: (userProfile.Object["team"] as? PFObject)!)
+        
         var t1name : String = team.Object["name"] as! String
-        println(passedTeam)
         var t2name : String = passedTeam.Object["name"] as! String
-        team.challengeTeam(passedTeam, name: "\(t1name) vs \(t2name)")
+        
+        println("\(t1name), \(t2name) are the teams that are competing.")
+        //team.challengeTeam(passedTeam, name: "\(t1name) vs \(t2name)")
+        
+        
+        
         // get both team names and push competition object
 //        var team1 = PFUser.currentUser()["profile"].
 //        var team1 = PFUser.currentUser()!.
